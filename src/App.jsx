@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CategorySelector from "./CategorySelector";
 import * as Category from "./components/Category";
 import * as SubModal from "./components/SubModal";
+import { Button } from "./components/Button";
 import * as API from "./api";
 import * as C from "./category";
 import "./scss/index.scss";
@@ -34,8 +35,8 @@ export default function App() {
         </Category.List>
       </SubModal.Body>
       <SubModal.Footer>
-        <button className="button button-record">取消</button>
-        <button className="button button-step-primary">確定</button>
+        <Button type="record">取消</Button>
+        <Button step type="primary">確定</Button>
       </SubModal.Footer>
     </SubModal.Wrapper>
   );
