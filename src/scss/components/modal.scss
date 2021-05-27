@@ -1,0 +1,943 @@
+body {
+  &.limitScroll {
+    overflow: hidden;
+  }
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  // select2 用了 1000 and 1051 ，所以我們從 900 開始
+  z-index: 900;
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+
+  &-mobileDark {
+    @include size(padP) {
+      .modal_header {
+        background: transparent;
+        justify-content: center;
+        .modal_close {
+          display: none;
+        }
+      }
+      .modal_background {
+        opacity: 0.8;
+      }
+      .modal_wrapper {
+        background: transparent;
+        max-height: none;
+        margin-top: 0;
+      }
+      .modal_content {
+        background: transparent;
+        color: #ffffff;
+        &_action {
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin: 30px auto 0 auto;
+          text-align: center;
+          > .button {
+            background: transparent;
+            border: 1px solid #ffffff;
+            border-radius: 40px;
+            font-size: 16px;
+            color: #ffffff;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+      .modal_footer {
+        display: flex;
+        justify-content: space-between;
+        background: transparent;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-top-width: 0;
+        .button {
+          background: transparent;
+          border: 0;
+          color: #ffffff;
+          font-size: 16px;
+        }
+        > div {
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+  &-open {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 1000;
+    .modal_wrapper {
+      transform: translate(-50%, -50%);
+    }
+  }
+  &-clear {
+    .modal_wrapper {
+      background: #fff;
+    }
+  }
+  &_background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    opacity: 0.5;
+  }
+  &_desc {
+    @include size(padP) {
+      padding: 0 8px;
+    }
+  }
+  &_wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    max-width: 1000px;
+    background: $color-primary-30;
+    transform: translate(-50%, 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+    @include size(padP) {
+      max-height: calc(100% - 50px);
+      margin-top: 25px;
+      bottom: -50%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    // .nameReady-create, .limitScroll &{
+    //   @include size(padS){
+    //     overflow: auto;
+    //   }
+    // }
+  }
+  &_header {
+    background: $color-primary-400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 24px;
+    @include size(padP) {
+      flex: 0 0 auto;
+    }
+  }
+  &_title {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 32px;
+    color: #ffffff;
+  }
+  &_close {
+    color: #ffffff;
+    font-size: 32px;
+    cursor: pointer;
+  }
+  &_content {
+    padding: 16px 32px;
+    max-height: 70vh;
+    overflow: auto;
+    @include size(padP) {
+      height: calc(100% - 60px);
+      flex: 1 1 auto;
+      padding: 16px;
+      max-height: none;
+    }
+
+    .nameReady-create,
+    .limitScroll & {
+      @include size(pad) {
+        .modal_tempTrademark_hint {
+          @include size(padS) {
+            margin-top: 15px;
+            p {
+              text-align: left;
+            }
+          }
+          &_images {
+            @include size(padS) {
+              display: flex;
+              flex-direction: column;
+              margin-top: 0;
+            }
+            img {
+              width: 47%;
+              flex: 0 0 47%;
+              @include size(padS) {
+                width: 100%;
+                margin-top: 25px;
+              }
+            }
+          }
+        }
+      }
+      @include size(padS) {
+        form {
+          display: flex !important;
+          flex-direction: column !important;
+          margin-top: 20px !important;
+        }
+      }
+    }
+  }
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: #fff;
+    border-top: 1px solid $color-primary-100;
+    @include size(padP) {
+      flex: 0 0 auto;
+      &.categorySearch_taggedSearch_step-1 {
+        padding: 10px 24px;
+        .button {
+          height: 53px;
+          font-size: 20px;
+        }
+      }
+    }
+    > div {
+      display: flex;
+      flex-direction: row-reverse;
+      flex: 1 0 auto;
+      > * {
+        margin-left: 24px;
+        &:last-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  &_image {
+    max-height: 498px;
+    max-width: 498px;
+    height: 100%;
+    width: 100%;
+
+    &_wrapper {
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &_fontBoxList {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    flex: 0 1 125px;
+  }
+  &_fontBox {
+    position: relative;
+    box-sizing: border-box;
+    margin-right: 8px;
+    line-height: 0;
+    &::after {
+      color: #fff;
+      display: block;
+      text-align: center;
+    }
+    &-1,
+    &-2,
+    &-3 {
+      &::after {
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        bottom: -16px;
+      }
+    }
+    &-1 {
+      &::after {
+        content: "標楷體";
+      }
+    }
+    &-2 {
+      &::after {
+        content: "新細明體";
+      }
+    }
+    &-3 {
+      &::after {
+        content: "思源黑體";
+      }
+    }
+    &-main {
+      position: relative;
+      box-sizing: border-box;
+      line-height: 0;
+      &::before {
+        position: absolute;
+        display: block;
+        content: '';
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid $color-primary-400;
+      }
+      &_top,
+      &_bottom {
+        &::before,
+        &::after {
+          box-sizing: border-box;
+          position: absolute;
+          display: block;
+          content: '';
+          width: 46px;
+          height: 46px;
+          border-width: 0;
+          border-style: solid;
+          border-color: $color-primary-400;
+        }
+      }
+      &_top {
+        &::before {
+          left: -3px;
+          top: -3px;
+          border-left-width: 6px;
+          border-top-width: 6px;
+        }
+        &::after {
+          top: -3px;
+          right: -3px;
+          border-top-width: 6px;
+          border-right-width: 6px;
+        }
+      }
+      &_bottom {
+        &::before {
+          left: -3px;
+          bottom: -3px;
+          border-left-width: 6px;
+          border-bottom-width: 6px;
+        }
+        &::after {
+          right: -3px;
+          bottom: -3px;
+          border-right-width: 6px;
+          border-bottom-width: 6px;
+        }
+      }
+    }
+    &-active {
+      &::before {
+        position: absolute;
+        display: block;
+        content: '';
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border: 3px solid $color-primary-400;
+      }
+    }
+  }
+  &_card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1 1 45%;
+    margin-right: 16px;
+    margin-bottom: 16px;
+
+    @include size(padP) {
+      padding: 8px;
+      margin-right: 0;
+      flex: 1 1 100%;
+    }
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+    &:last-child,
+    &:nth-last-child(2) {
+      margin-bottom: 0;
+    }
+    &:nth-last-child(2) {
+      @include size(padP) {
+        margin-bottom: 16px;
+      }
+    }
+    &_hr {
+      margin: 16px 0;
+      height: 1px;
+      background: #d8e2f5;
+    }
+    &_container {
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 16px;
+    }
+    &_title {
+      font-weight: bold;
+      font-size: 30px;
+      margin-bottom: 4px;
+    }
+    &_infobox {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @include size(padP) {
+        padding: 0 4px;
+      }
+
+      &_title {
+        margin-right: 16px;
+      }
+      &_link {
+        font-weight: bold;
+        font-size: 20px;
+        color: $color-primary-400;
+      }
+    }
+    &_image {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      width: 92px;
+      height: 92px;
+      flex: 0 0 auto;
+      border: solid 1px #d8e2f5;
+      border-radius: 4px;
+      margin-right: 16px;
+      &-big {
+        width: 180px;
+        height: 180px;
+        padding: 5px;
+
+        @include size(padP) {
+          width: 130px;
+          height: 130px;
+        }
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+
+  &_subModal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #00000088;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    &-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    &_wrapper {
+      position: absolute;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      > * {
+        border-bottom: 1px solid $color-primary-100;
+        &:last-child {
+          border-bottom-left-radius: 8px;
+          border-bottom: 0;
+        }
+      }
+    }
+    &_header,
+    &_body,
+    &_footer {
+      background-color: #fff;
+    }
+    &_header {
+      flex-shrink: 0;
+      padding: 16px 24px;
+      &_title,
+      &_description {
+        line-height: 22px;
+      }
+      &_title {
+        font-size: 12px;
+        color: #666;
+      }
+      &_description {
+      }
+    }
+    &_body {
+      flex: 1 1 auto;
+      padding: 10px 24px;
+      overflow: auto;
+    }
+    &_footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-shrink: 0;
+      padding: 16px 20px;
+      // set min-heights for Safari/604.1
+      min-height: 72px;
+      .button {
+        min-height: 40px;
+      }
+    }
+  }
+
+  &_actions {
+    margin: 64px -8px;
+
+    @include size(padP) {
+      margin-top: 32px;
+    }
+    > * {
+      display: inline-block;
+      vertical-align: top;
+      margin: 8px;
+      width: calc(50% - 16px);
+      text-decoration: none;
+      color: inherit;
+      @include size(padP) {
+        width: calc(100% - 16px);
+      }
+    }
+    > .modal_action {
+      display: inline-flex;
+    }
+  }
+  &_action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-primary-100;
+    height: 344px;
+    border-radius: 8px;
+    cursor: pointer;
+    @include size(padP) {
+      height: auto;
+      padding: 32px 8px;
+    }
+    //for IE
+    &:nth-child(1) {
+      grid-column: 1;
+      @include size(padP) {
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+    &:nth-child(2) {
+      grid-column: 2;
+      @include size(padP) {
+        grid-column: 1;
+        grid-row: 2;
+      }
+    }
+    &_title,
+    &_description {
+      margin-bottom: 8px;
+      text-align: center;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &_title {
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 72px;
+    }
+    &_description {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+
+  &-newCategory {
+    .categorySearch {
+      &_categoryList {
+        height: 360px;
+        overflow-y: auto;
+        @include size(padP) {
+          height: auto;
+        }
+      }
+      &_subCategoryList {
+        li {
+          padding: 12px 0;
+        }
+      }
+      .form_input_wrapper {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  &-signature {
+    &_hint {
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    .modal_header,
+    .modal_content,
+    .modal_footer {
+      transition: opacity 0.5s ease-out;
+    }
+    #js_modal_signature_content {
+      position: relative;
+      width: 936px;
+      height: 500px;
+      border-radius: 8px;
+      overflow: auto;
+
+      &:after {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        color: $color-text-600;
+        font-size: 12px;
+        z-index: 40;
+        @include size(phone) {
+          content: '請在此空白區域內寫下您的姓名';
+        }
+      }
+
+      @include size(pad) {
+        width: 100%;
+        max-height: 500px;
+        height: 60vh;
+      }
+    }
+    &-landscape {
+      @include size(padP) {
+        #js_modal_signature_content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          &:after {
+            content: '請於空白處簽名，完成後請將手機直放以完成簽名';
+          }
+        }
+      }
+    }
+    &-hide {
+      .modal_header,
+      .modal_content,
+      .modal_footer {
+        transition: none;
+        opacity: 0;
+      }
+    }
+  }
+
+  &-font {
+    .modal {
+      &_content {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 102px;
+      }
+    }
+  }
+
+  &-myDetailedRecord {
+    .form_search_header {
+      .form_input_wrapper {
+        max-width: inherit;
+      }
+    }
+    .detailedResult,
+    .form_searchResult {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .detailedResult {
+      margin: -6px;
+      height: 360px;
+      .form_searchCard {
+        display: inline-flex;
+        vertical-align: top;
+        width: calc(33% - 12px);
+        margin: 6px;
+        height: 512px;
+        @include size(padM) {
+          width: calc(50% - 12px);
+        }
+        @include size(padS) {
+          width: calc(100% - 12px);
+          height: auto;
+        }
+        @include size(padP) {
+          display: inline-flex;
+          flex-direction: row;
+          .form_searchCard_image {
+            margin-right: 12px;
+            + div {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            }
+          }
+          .form_searchCard_content {
+            > * {
+              margin-bottom: 8px;
+            }
+          }
+          .form_searchCard_footer {
+            justify-content: flex-start;
+          }
+        }
+      }
+      @include size(padP) {
+        height: auto;
+      }
+    }
+    .form_searchResult {
+      height: 414px;
+      @include size(padP) {
+        height: auto;
+      }
+    }
+  }
+
+  &-categoryEditor {
+    &_title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 22px;
+      margin-bottom: 12px;
+    }
+    &_header {
+      display: flex;
+      flex-direction: row;
+      padding: 14px 32px;
+      border: 1px solid $color-primary-100;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      &_input {
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+        > * {
+          margin-right: 12px;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+      @include size(padP) {
+        flex-direction: column;
+      }
+      .form_selectInputWrapper {
+        @include size(padP) {
+          margin-bottom: 8px;
+        }
+      }
+      > * {
+        margin-right: 12px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      .form_input_wrapper {
+        flex: 1 1 auto;
+        max-width: inherit;
+      }
+      .button {
+        flex: 0 0 auto;
+        align-self: flex-start;
+      }
+    }
+    &_content {
+      height: 503px;
+      overflow-y: auto;
+      @include size(padP) {
+        height: auto;
+      }
+      .form_checkboxList {
+        margin-top: -1px;
+      }
+      .button {
+        flex: 0 0 auto;
+        align-self: flex-start;
+      }
+    }
+    &_footer{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      button{
+        position: static!important;
+      }
+    }
+  }
+
+  &-split {
+    &_content {
+      padding-bottom: 48px;
+      margin: -24px;
+      > div {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(50% - 48px);
+        margin: 24px;
+      }
+    }
+    .modal_footer {
+      border-top: 1px solid $color-primary-100;
+    }
+    &_title {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    &_list {
+      padding: 8px 24px;
+      height: 400px;
+      border: 1px solid $color-primary-200;
+      border-radius: 8px;
+      overflow-y: auto;
+      &_header,
+      &_item {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      &_header {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 20px;
+        color: $color-text-100;
+      }
+      &_item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        span {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  &-register {
+    .modal_content {
+      > * {
+        margin-bottom: 24px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .register {
+      &_external {
+        margin: 0 -12px 24px -12px;
+        button {
+          margin: 0 12px;
+        }
+        @include size(padP) {
+          margin: 0 -6px 24px -6px;
+          button {
+            width: calc(50% - 12px);
+            padding: 12px;
+            margin: 0 6px;
+            font-size: 16px;
+          }
+        }
+      }
+      &_city,
+      &_area,
+      &_address {
+        display: inline-block;
+        margin-right: 24px;
+      }
+      &_city,
+      &_area {
+        max-width: 175px;
+      }
+      &_address {
+        max-width: 400px;
+      }
+      &_areaCode,
+      &_tel,
+      &_extension {
+        display: inline-block;
+        margin-right: 16px;
+      }
+      &_areaCode,
+      &_extension {
+        max-width: 125px;
+      }
+      &_tel {
+        max-width: 205px;
+      }
+    }
+  }
+
+  &-registerComplete {
+    .modal_content {
+      @include maxSize(padP) {
+        min-height: 568px;
+      }
+    }
+    .form_row {
+      margin-top: 24px;
+      &_actionWrapper {
+        color: $color-primary-400;
+      }
+    }
+  }
+
+  .form {
+    &_input {
+      &_wrapper {
+        width: 100%;
+      }
+    }
+  }
+  .dataList_nav_search {
+    display: none;
+  }
+  .tab.ui-tabs .ui-tabs-nav {
+    margin-top: -16px;
+    margin-left: -32px;
+    margin-right: -32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    background: $color-primary-30;
+    border-bottom: 1px solid $color-primary-100;
+
+    @include size(padP) {
+      margin-top: -16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+}

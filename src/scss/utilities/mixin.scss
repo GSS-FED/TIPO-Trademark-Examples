@@ -1,0 +1,56 @@
+@mixin size($media) {
+  @if $media == desktop {
+    @media (max-width: #{$media-desktop}px) { @content; }
+  }
+  @if $media == desktop-s {
+    @media (max-width: #{$media-desktop-s}px) { @content; }
+  }
+  @else if $media == pad {
+    @media (max-width: #{$media-pad}px){ @content; }
+  }
+  @else if $media == padM {
+    @media (max-width: #{$media-pad-middle}px) { @content; }
+  }
+  @else if $media == padP {
+    @media (max-width: #{$media-pad-portrait}px) { @content; }
+  }
+  @else if $media == padS {
+    @media (max-width: #{$media-pad-small}px) { @content; }
+  }
+  @else if $media == phone {
+    @media (max-width: #{$media-phone}px) { @content; }
+  }
+  @else if $media == phonexs {
+    @media (max-width: #{$media-phone-xs}px) { @content; }
+  }
+}
+@mixin maxSize($media){
+  @if $media == desktop {
+    @media (min-width: #{$media-desktop}px) { @content; }
+  }
+  @if $media == desktop-s {
+    @media (min-width: #{$media-desktop-s}px) { @content; }
+  }
+  @else if $media == pad {
+    @media (min-width: #{$media-pad}px){ @content; }
+  }
+  @else if $media == padM {
+    @media (min-width: #{$media-pad-middle}px) { @content; }
+  }
+  @else if $media == padP {
+    @media (min-width: #{$media-pad-portrait}px) { @content; }
+  }
+  @else if $media == padS {
+    @media (min-width: #{$media-pad-small}px) { @content; }
+  }
+  @else if $media == phone {
+    @media (min-width: #{$media-phone}px) { @content; }
+  }
+  @else if $media == phonexs {
+    @media (min-width: #{$media-phone-xs}px) { @content; }
+  }
+
+}
+@mixin font($f){
+  font-size: #{$f / $font}rem;
+}

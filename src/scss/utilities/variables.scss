@@ -1,0 +1,57 @@
+// -------------------------------------
+//   colors
+// -------------------------------------
+
+// primary colors
+$color-primary-900: #001533;
+$color-primary-800: #002a66;
+$color-primary-700: #003f99;
+$color-primary-600: #0054cc;
+$color-primary-500: #0069ff;
+$color-primary-400: #3387ff;
+$color-primary-300: #66a5ff;
+$color-primary-200: #99c3ff;
+$color-primary-100: #cce1ff;
+$color-primary-50: #eef5ff;
+$color-primary-30: #f6faff;
+// secondary colors
+$color-light-green: #41d4b3;
+$color-light-red: #e86a6a;
+$color-light-purple: #978cfc;
+// text colors
+$color-text-700: #333;
+$color-text-600: #5c5c5c;
+$color-text-200: #888;
+$color-text-100: #c8c8c8;
+// other colors
+$color-notice-orange: #f8955d;
+$color-notice-red-dark: #8a2d18;
+$color-notice-red: #e12700;
+$color-notice-red-light: #e75134;
+
+// -------------------------------------
+//   notice
+// -------------------------------------
+
+$color-notice-warning: $color-notice-orange;
+$color-notice-error: $color-notice-red;
+
+// -------------------------------------
+//   media queries
+// -------------------------------------
+
+$media-desktop: 1440;
+$media-desktop-s: 1280;
+$media-pad: 1024;
+$media-pad-middle: 900;
+$media-pad-portrait: 768;
+$media-pad-small: 600;
+$media-phone: 500;
+$media-phone-xs: 320;
+
+// -------------------------------------
+//   layout
+// -------------------------------------
+
+$single-column-inner-width: 878px;
+$single-column-back-height: 23px;

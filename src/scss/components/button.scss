@@ -1,0 +1,338 @@
+.button {
+  display: inline-block;
+  padding: 7px 16px;
+  font-size: 18px;
+  border-radius: 4px;
+  transition: 0.3s all;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  appearance: none;
+  white-space: nowrap;
+  &-step {
+    &-primary {
+      background: #2dc8a8;
+      color: #ffffff;
+
+      &:hover {
+        background: #56d3b9;
+      }
+      &:active {
+        transition: none;
+        background: #307e6f;
+      }
+      &:disabled {
+        background: #87d6c6;
+        opacity: 0.5;
+      }
+    }
+    &-secondary {
+      background: transparent;
+      border: 1px solid #2dc8a8;
+      color: #2dc8a8;
+
+      &:hover {
+        border: 1px solid #56d3b9;
+        color: #56d3b9;
+      }
+      &:active {
+        transition: none;
+        border: 1px solid #307e6f;
+        color: #307e6f;
+      }
+      &:disabled {
+        border: 1px solid #87d6c6;
+        color: #87d6c6;
+        opacity: 0.5;
+      }
+    }
+  }
+  &-primary {
+    position: relative;
+    background: linear-gradient(
+      287.65deg,
+      $color-primary-300 34.81%,
+      #ffffff 156.91%
+    );
+    color: #ffffff;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      transition: all 0.3s;
+      opacity: 0;
+    }
+    &::before {
+      background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+      );
+    }
+    &::after {
+      background: linear-gradient(
+        0deg,
+        rgba(0, 63, 153, 0.5),
+        rgba(0, 63, 153, 0.5)
+      );
+    }
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+    &:active {
+      &::before {
+        opacity: 0;
+      }
+      &::after {
+        transition: none;
+        opacity: 1;
+      }
+    }
+    &:disabled {
+      background: linear-gradient(
+        287.65deg,
+        $color-primary-300 34.81%,
+        #ffffff 156.91%
+      );
+      opacity: 0.5;
+      &::before {
+        opacity: 0;
+      }
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+  &-secondary {
+    background: #ffffff;
+    border: 1px solid $color-primary-400;
+    color: $color-primary-400;
+    line-height:24px;
+
+    &:hover {
+      border-color: $color-primary-300;
+      color: $color-primary-300;
+    }
+    &:active {
+      transition: none;
+      border-color: $color-primary-600;
+      color: $color-primary-600;
+    }
+    &:disabled {
+    }
+  }
+  &-record {
+    background: #ffffff;
+    border: 1px solid $color-primary-100;
+    color: $color-text-700;
+    line-height:24px;
+
+    &:hover {
+      background: $color-primary-30;
+    }
+    &:active {
+      transition: none;
+      background: $color-primary-50;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+  &-action {
+    position: relative;
+    background: linear-gradient(
+      287.65deg,
+      $color-primary-300 34.81%,
+      #ffffff 156.91%
+    );
+    border-radius: 24px;
+    font-size: 16px;
+    color: #ffffff;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      transition: all 0.3s;
+      opacity: 0;
+    }
+    &::before {
+      background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2)
+      );
+    }
+    &::after {
+      background: linear-gradient(
+        0deg,
+        rgba(0, 63, 153, 0.5),
+        rgba(0, 63, 153, 0.5)
+      );
+    }
+    &:hover {
+      &::before {
+        opacity: 1;
+      }
+    }
+    &:active {
+      &::before {
+        opacity: 0;
+      }
+      &::after {
+        transition: none;
+        opacity: 1;
+      }
+    }
+    &:disabled {
+      background: linear-gradient(
+        287.65deg,
+        $color-primary-300 34.81%,
+        #ffffff 156.91%
+      );
+      opacity: 0.5;
+      &::before {
+        opacity: 0;
+      }
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+  &-little {
+    &-primary {
+      padding: 4px 12px;
+      font-size: 16px;
+      background: $color-primary-400;
+      color: #ffffff;
+
+      &:hover {
+        background: $color-primary-300;
+      }
+      &:active {
+        transition: none;
+        background: $color-primary-600;
+      }
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+    &-secondary {
+      background: transparent;
+      padding: 4px 12px;
+      font-size: 16px;
+      border: 1px solid $color-primary-400;
+      color: $color-primary-400;
+
+      &:hover {
+        border: 1px solid $color-primary-300;
+        color: $color-primary-300;
+      }
+      &:active {
+        transition: none;
+        border: 1px solid $color-primary-600;
+        color: $color-primary-600;
+      }
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+  &-text {
+    background: transparent;
+    padding: 4px 12px;
+    font-size: 16px;
+    color: $color-primary-400;
+
+    &:hover {
+      color: $color-primary-300;
+    }
+    &:active {
+      transition: none;
+      color: $color-primary-600;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+
+    &-red {
+      background: transparent;
+      padding: 4px 12px;
+      font-size: 16px;
+      color: $color-notice-red;
+
+      &:hover {
+        color: $color-notice-red-light;
+      }
+      &:active {
+        transition: none;
+        color: $color-notice-red-dark;
+      }
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+    &-black {
+      background: transparent;
+      padding: 4px 12px;
+      font-size: 16px;
+      color: $color-text-700;
+
+      &:hover {
+        color: $color-text-600;
+      }
+      &:active {
+        transition: none;
+        color: $color-text-700;
+      }
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+  &-login {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: $color-text-700;
+    color: #fff;
+    padding: 12px 32px;
+    font-size: 20px;
+    line-height: 22px;
+    border-radius: 10px;
+    width: 400px;
+    @include size(padP) {
+      width: 100%;
+      @include size(padP) {
+        margin-right: 0;
+        margin-top: 16px;
+      }
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+  &_text {
+    position: relative;
+    z-index: 1;
+    line-height: 24px;
+  }
+
+  i.fas,
+  .svg-inline--fa {
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,1807 @@
+.nameReady-create {
+  @include size(pad) {
+    .form {
+      &_row-fixedWidth {
+        max-width: 100%;
+        padding: 0;
+      }
+    }
+  }
+  @include size(padP) {
+    .form {
+      &_infobox {
+        margin-bottom: 0;
+      }
+      &_addzone {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+      }
+      &_hr {
+        position: relative;
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          left: -24px;
+          right: -24px;
+          height: 1px;
+          background: $color-primary-100;
+        }
+      }
+    }
+  }
+  @include size(padS) {
+    .form {
+      &_input_wrapper {
+      }
+      &_infobox {
+        position: relative;
+        flex-direction: column;
+        padding: 60px 24px 18px;
+        &_desc {
+          margin-bottom: 15px;
+        }
+        &_actionBlock {
+          flex: 1 1 auto;
+        }
+        &_iconSet {
+          display: flex;
+          justify-content: space-between;
+          position: absolute;
+          top: 14px;
+          left: 24px;
+          right: 24px;
+        }
+      }
+      &_addzone {
+        padding: 10px 30px;
+      }
+    }
+  }
+}
+.dataReady-applicant {
+  .form {
+    &_row {
+      @include size(padS) {
+        display: block;
+        margin-bottom: 40px;
+      }
+      &-required {
+        @include size(padS) {
+          display: block;
+        }
+      }
+      &_title {
+        @include size(padS) {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+  .application {
+    &_imagebox_container {
+      @include size(phone) {
+        .form_selectInputWrapper {
+          margin: 3px 0;
+        }
+      }
+    }
+  }
+}
+.form {
+  &_detail {
+    padding: 0 8px;
+    margin-bottom: 24px;
+
+    &_title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+
+      @include size(padP) {
+        font-size: 16px;
+      }
+    }
+    &_desc {
+      @include size(padP) {
+        font-size: 12px;
+      }
+    }
+  }
+  &_row,
+  &_subSection,
+  &_block {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  &_group {
+    margin-bottom: 24px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  &_row {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    margin-bottom: 24px;
+
+    @include size(padP) {
+      position: relative;
+    }
+    @include size(pad) {
+      flex-wrap: wrap;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    &-required {
+      @extend .form_row;
+    }
+    &-fixedWidth {
+      width: 750px;
+    }
+    &_title {
+      flex: 0 0 7em;
+      margin-right: 32px;
+
+      @include size(pad) {
+        margin: 0;
+        flex: 1 1 100%;
+        margin-bottom: 8px;
+      }
+      .form_subSection & {
+        margin-right: 16px;
+      }
+      .form_section & {
+        color: $color-text-200;
+      }
+      > div,
+      > span {
+        display: inline-block;
+        position: relative;
+
+        &::before {
+          .form_row-required & {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 4px;
+            height: 4px;
+            background: $color-notice-red;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+    &_actionWrapper {
+      flex: 1 1 auto;
+      width: 100%; //for IE
+
+      > * {
+        margin-top: 16px;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+      .form_row_item-first {
+        margin-top: 0;
+      }
+
+      .form_row_info {
+        margin-top: 8px;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+      button {
+        margin-right: 18px;
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+    &_image img {
+      max-width: 470px;
+    }
+    &_question {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(120%, -50%);
+      cursor: pointer;
+    }
+    &_info {
+      &:empty {
+        display: none;
+      }
+      @include size(padP) {
+        font-size: 12px;
+      }
+      &-desc {
+        @extend .form_row_info;
+        color: #898989;
+      }
+      &-error {
+        @extend .form_row_info;
+        color: $color-notice-red;
+      }
+    }
+    &_hint {
+      margin-left: 16px;
+      @include size(padP) {
+        position: absolute;
+        display: block;
+        top: 0;
+        right: 8px;
+        margin-top: 0;
+        // 左邊沒有東西了
+        margin-left: 0;
+      }
+    }
+    &-multiline {
+      flex-direction: column;
+      align-items: flex-start;
+      .form {
+        &_row {
+          &_title {
+            flex: initial;
+            margin-bottom: 8px;
+          }
+          &_actionWrapper {
+            flex: initial;
+            .form_selectInputContainer {
+              &::before {
+                content: "";
+                display: block;
+                width: 7em;
+                margin-right: 32px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &_hr {
+    height: 1px;
+    background: #b3d4ff;
+    margin: 16px 0;
+  }
+  &_table {
+    table-layout: fixed;
+    width: 100%;
+
+    &-right {
+      text-align: right;
+    }
+  }
+  &_tr {
+    &-underline {
+      border-bottom: $color-primary-300;
+    }
+  }
+  &_td {
+    padding: 8px 12px;
+
+    &-noPadding {
+      padding: 0;
+    }
+    &-desc {
+      color: rgba(51, 51, 51, 0.4);
+    }
+    &-formula {
+      width: 144px;
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 1;
+    }
+    &-answer {
+      font-size: 30px;
+      color: $color-primary-300;
+    }
+  }
+  &_subSection {
+    background: #dfebfd;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    width: 100%;
+    &_block {
+      margin-bottom: 12px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+    &_title {
+      padding-left: 8px;
+      margin-bottom: 16px;
+      font-weight: bold;
+    }
+    &_action {
+      margin-top: 8px;
+      width: 100%;
+      text-align: right;
+      color: $color-primary-300;
+      cursor: pointer;
+    }
+  }
+  &_section {
+    background: $color-primary-30;
+    width: 100%;
+    border: 1px solid $color-primary-200;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    position: relative;
+
+    @include size(padP) {
+      padding: 20px 8px;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    &_title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1.1;
+    }
+    &_action {
+      padding-left: 8px;
+      color: $color-primary-300;
+      cursor: pointer;
+    }
+    &_row {
+      margin-bottom: 24px;
+    }
+    &_desc {
+      &-error {
+        color: $color-notice-red;
+      }
+      &-answer {
+        font-size: 30px;
+        font-weight: bold;
+        color: $color-primary-300;
+      }
+    }
+    &_icon {
+      position: absolute;
+      right: 20px;
+      top: 16px;
+      display: flex;
+      height: 32px;
+      width: 32px;
+      justify-content: center;
+      align-items: center;
+      color: $color-primary-300;
+      cursor: pointer;
+      &-button {
+        pointer-events: all;
+        cursor: pointer;
+      }
+    }
+    &-active {
+      background-color: transparent;
+      border-color: $color-primary-100;
+    }
+  }
+  &_block {
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: $color-primary-30;
+    min-width: 400px;
+    padding: 16px;
+    border: 1px dashed $color-primary-200;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  &_agreement {
+    font-size: 20px;
+    line-height: 1.1;
+    color: #aeaeae;
+    text-align: left;
+    margin-bottom: 24px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    @include size(padP) {
+      padding: 0 16px;
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+  &_input {
+    &_wrapper {
+      position: relative;
+      max-width: 470px;
+      width: 60%;
+      .form_search_content &{
+        max-width: 100%;
+        width: 100%;
+      }
+      @include size(padP) {
+        max-width: none;
+        width: 100%;
+      }
+      &_message {
+        margin-top: 5px;
+        font-size: 12px;
+        line-height: 16px;
+      }
+      > * {
+        margin-right: 24px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      input,
+      textarea {
+        &:focus {
+          box-shadow: 0px 0px 0px 2px rgba(102, 165, 255, 0.2);
+        }
+      }
+      input {
+        border: 1px solid #d8e2f5;
+        border-radius: 4px;
+        height: 40px;
+        padding: 0 12px;
+        width: 100%;
+
+        &:focus {
+          border: solid 1px $color-primary-300;
+        }
+        &::placeholder {
+          color: $color-text-100;
+        }
+      }
+      textarea {
+        border: 1px solid #d8e2f5;
+        border-radius: 4px;
+        padding: 8px 12px;
+        width: 100%;
+        min-height: 120px;
+        resize: none;
+        &:focus {
+          border: solid 1px $color-primary-300;
+        }
+        &::placeholder {
+          color: $color-text-100;
+        }
+      }
+      .readonly {
+        background: $color-primary-30;
+        border: 1px solid #d8e2f5;
+        color: #b8d1e6;
+        &:focus {
+          border: 1px solid #d8e2f5;
+        }
+        &::placeholder {
+          color: #b8d1e6;
+        }
+      }
+      &-inline {
+        display: inline-block;
+      }
+      &-error {
+        input,
+        textarea {
+          border-color: $color-notice-red-light;
+          &:focus {
+            border-color: $color-notice-red;
+            box-shadow: 0px 0px 0px 2px rgba(225, 39, 0, 0.2);
+          }
+        }
+        .form_input_wrapper_message {
+          color: $color-notice-red;
+        }
+        .form_input_icon {
+          border-color: $color-notice-red-light;
+        }
+        :focus + .form_input_icon {
+          border-color: $color-notice-red;
+        }
+      }
+    }
+
+    &_icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border-left: 1px solid #d8e2f5;
+      //pointer-events: pointer;
+      cursor: pointer;
+      :focus + & {
+        border-left: 1px solid $color-primary-300;
+      }
+    }
+  }
+
+  &_progress {
+    width: 60%;
+
+    &_wrapper {
+      position: relative;
+      overflow: auto;
+      border: 1px solid #d8e2f5;
+      border-radius: 4px;
+      height: 40px;
+      padding: 6px 12px;
+      width: 100%;
+      color: $color-text-200;
+    }
+
+    &_bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      background-color: $color-primary-400;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    &_message {
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    &-error {
+      .form_progress {
+        &_wrapper {
+          border-color: $color-notice-red-light;
+        }
+        &_bar {
+          background-color: $color-notice-red;
+        }
+        &_message {
+          color: $color-notice-red;
+        }
+      }
+    }
+  }
+
+  &_selectInputContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    .form_selectInputWrapper {
+      margin-right: 24px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @include size(padP) {
+        margin-right: 0;
+      }
+    }
+    &-verticalInMobile {
+      @include size(pad) {
+        flex-direction: column;
+        padding-left: 16px;
+        .form_selectInputWrapper {
+          margin-right: 0;
+          margin-bottom: 16px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    &-desktopOnly {
+      @include size(pad) {
+        .form_radio {
+          border: 0;
+          &::after {
+            content: none;
+          }
+        }
+        input[type=radio] + .form_radio {
+          display: none;
+        }
+        input[type=radio] + .form_radio + span {
+          display: none;
+        }
+        input[type=radio]:checked + .form_radio + span {
+          display: inline;
+        }
+      }
+    }
+  }
+  &_selectInputWrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .form_selectInput {
+      margin-right: 8px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  &_selectInput {
+    position: relative;
+    border: solid 1px #d8e2f5;
+    background-color: #ffffff;
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+
+    :focus + & {
+      border: solid 1px $color-primary-300;
+    }
+    &::after {
+      content: "";
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+
+      :checked + &,
+      :checked + div & {
+        display: block;
+      }
+    }
+    &_label {
+    }
+  }
+  &_checkbox {
+    @extend .form_selectInput;
+    &::after {
+      border-right: 3px solid $color-primary-300;
+      border-bottom: 3px solid $color-primary-300;
+      transform: translate(-50%, -70%) rotate(45deg);
+      width: 6px;
+      height: 10px;
+    }
+    &-partial {
+      &::after {
+        border: 0;
+        transform: translate(-50%, -50%) rotate(0);
+        background-color: $color-primary-300;
+        width: 14px;
+        height: 4px;
+      }
+    }
+  }
+  &_radio {
+    @extend .form_selectInput;
+    border-radius: 50%;
+
+    &::after {
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: $color-primary-300;
+    }
+  }
+  &_select {
+  }
+  &_descCard {
+    margin: 9px 0;
+    padding: 16px;
+    border: 1px solid #d8e2f5;
+    border-radius: 4px;
+
+    &_title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    &_desc {
+      font-size: 16px;
+    }
+  }
+  &_exampleBox {
+    padding: 7px 12px 15px;
+    border-radius: 8px;
+    background: rgba(174, 205, 251, 0.4);
+    align-self: flex-start;
+
+    @include size(pad) {
+      display: none;
+    }
+    &_title {
+      display: block;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    &_img {
+      background-position: center;
+      background-size: cover;
+      margin: 0 8px;
+      flex: 0 0 auto;
+      width: 90px;
+      height: 90px;
+      display: inline-block;
+      font-size: 0;
+
+      @include size(desktop-s) {
+        display: none;
+      }
+      &:first-of-type {
+        @include size(desktop-s) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  &_radioCard {
+    padding: 16px;
+    border: 1px solid #d8e2f5;
+    border-radius: 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    :focus + &,
+    :checked + & {
+      border: solid 1px $color-primary-300;
+    }
+    &_title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      flex: 0 0 1em;
+      display: flex;
+      justify-content: space-between;
+
+      @include size(padP) {
+        margin-bottom: 20px;
+      }
+    }
+    .form_radio {
+      margin-left: 16px;
+    }
+    &_block {
+      display: flex;
+      flex: 1 1 auto;
+    }
+    &_desc {
+      flex: 1 1 60%;
+    }
+    &_img {
+      background-position: 100% 50%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      flex: 1 1 40%;
+    }
+
+    &_wrapper {
+      flex: 0 1 300px;
+      margin-right: 16px;
+      &:last-child {
+        margin-right: 0;
+      }
+      @include size(padP) {
+        flex: 0 0 auto;
+        width: 80%;
+        margin-right: 0;
+      }
+    }
+
+    &_container {
+      display: flex;
+      padding: 0 8px;
+      margin-bottom: 24px;
+      width: 100%;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      @include size(padP) {
+        padding: 0;
+        overflow-x: scroll;
+      }
+    }
+  }
+  &_uploadzone {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 56px;
+    border-radius: 8px;
+    background: $color-primary-30;
+    border: 1px dashed #98ccff;
+
+    @include size(desktop-s) {
+      width: 100%;
+      padding: 10px;
+    }
+    @include size(pad) {
+      flex-direction: column;
+    }
+    * {
+      @include size(pad) {
+        display: none;
+      }
+    }
+    .uppy-Root {
+      display: block;
+    }
+    &::before {
+      @include size(pad) {
+        content: "";
+        //background-image: url("../assets/upload_image.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+        z-index: 1;
+        height: 22px;
+        width: 36px;
+        margin-bottom: 4px;
+        pointer-events: none;
+      }
+    }
+    &::after {
+      @include size(pad) {
+        content: "選擇檔案";
+        position: relative;
+        z-index: 1;
+        line-height: 22px;
+        color: $color-primary-300;
+        pointer-events: none;
+      }
+    }
+    &_block {
+      margin-bottom: 8px;
+      margin-right: 24px;
+    }
+    &_title {
+      font-weight: bold;
+      font-size: 28px;
+      pointer-events: none;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 4px;
+    }
+    &_desc {
+      margin-right: 12px;
+      pointer-events: none;
+      position: relative;
+      z-index: 1;
+    }
+    .button {
+      position: relative;
+      z-index: 1;
+      margin-right: 0;
+    }
+  }
+  &_addzone {
+    display: inline-flex;
+    background: $color-primary-30;
+    border: 1px dashed #98ccff;
+    border-radius: 8px;
+    padding: 10px 80px;
+
+    @include size(pad) {
+      padding: 10px 20px 10px 32px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    &_block {
+      margin-bottom: 8px;
+      margin-right: 24px;
+
+      @include size(padP) {
+        margin-right: 16px;
+      }
+    }
+    &_title {
+      font-weight: bold;
+      font-size: 28px;
+      pointer-events: none;
+      margin-bottom: 4px;
+    }
+    &_desc {
+      margin-right: 12px;
+      pointer-events: none;
+    }
+    .button {
+      align-self: center;
+      flex: 0 0 auto;
+    }
+  }
+  &_infobox {
+    border-radius: 8px;
+    background: $color-primary-30;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    display: flex;
+
+    @include size(padP) {
+      flex-direction: column;
+      padding-top: 60px;
+      position: relative;
+    }
+    &_infoBlock {
+      flex: 1 1 auto;
+
+      @include size(padP) {
+        margin-bottom: 8px;
+      }
+    }
+    &_actionBlock {
+      flex: 0 0 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      @include size(pad) {
+        flex: 0 0 176px;
+      }
+      @include size(padP) {
+        flex: auto;
+      }
+    }
+    &_iconSet {
+      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+
+      @include size(padP) {
+        position: absolute;
+        top: 20px;
+        left: 24px;
+        right: 24px;
+        display: flex;
+        justify-content: space-between;
+      }
+      > * {
+        margin-right: 16px;
+        cursor: pointer;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &_iconContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+    }
+    &_calcBlock {
+      text-align: right;
+
+      &_formula {
+        font-size: 20px;
+        line-height: 1.1;
+      }
+      &_field {
+        margin-bottom: 12px;
+      }
+      &_answer {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 1;
+        color: $color-primary-300;
+      }
+    }
+    &-warn {
+    }
+    &-error {
+      background: #ffeaea;
+    }
+    &_title {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    &_desc {
+      margin-bottom: 48px;
+
+      @include size(padP) {
+        margin-bottom: 12px;
+      }
+      &-custom {
+        color: $color-primary-300;
+      }
+      &-error {
+        color: $color-notice-red;
+        font-weight: 500;
+      }
+    }
+    &_message {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 8px;
+
+      .form_infobox-warn & {
+      }
+      .form_infobox-error & {
+        color: $color-notice-red;
+        font-weight: 500;
+      }
+      &_icon {
+        font-size: 14px;
+        color: #27c200;
+        //margin-right: 8px;
+        display: inline-flex;
+        width: 32px;
+        height: 32px;
+        justify-content: center;
+        align-items: center;
+
+        .form_infobox-warn & {
+          color: #f8955d;
+        }
+        .form_infobox-error & {
+          color: $color-notice-red;
+        }
+      }
+    }
+    &_tips {
+      font-size: 16px;
+      color: $color-text-100;
+
+      &:empty {
+        margin-top: -8px;
+      }
+    }
+  }
+  &_imagebox {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 166px;
+    height: 166px;
+    background-color: #fff;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 1px solid #d8e2f5;
+    vertical-align: bottom;
+    border-radius: 4px;
+  }
+  &_textbox {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 166px;
+    height: 166px;
+    border: 1px solid #d8e2f5;
+    vertical-align: bottom;
+    border-radius: 4px;
+  }
+  &_tag {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-start;
+    background-color: $color-primary-400;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 32px;
+    white-space: nowrap;
+    &_close {
+      margin-left: 12px;
+      cursor: pointer;
+    }
+    // 商標
+    &-kind1 {
+      background-color: #0069ff;
+    }
+    // 團體商標
+    &-kind2 {
+      background-color: #41d4b3;
+    }
+    // 證明標章
+    &-kind3 {
+      background-color: #978cfc;
+    }
+    // 團體標章
+    &-kind4 {
+      background-color: #e86a6a;
+    }
+  }
+  &_taggedInput {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+    padding: 12px 8px 8px 16px;
+    border: solid 1px #d8e2f5;
+    border-radius: 4px;
+    min-width: 0;
+    overflow-y: auto;
+    &-focus {
+      border-color: $color-primary-300;
+    }
+    &_input {
+      flex: 1 1 auto;
+      display: inline-block;
+      border: 0;
+      padding: 0;
+      height: 32px;
+    }
+    > * {
+      margin-right: 8px;
+      margin-bottom: 4px;
+    }
+  }
+  &_collapsible {
+    &_title,
+    &_content {
+      padding: 8px 0;
+    }
+    > .form_collapsible_title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      > span {
+        display: block;
+        flex: 1 1 auto;
+      }
+      > .form_collapsible {
+        &_chevron {
+          cursor: pointer;
+          height: 32px;
+          width: 32px;
+          justify-content: center;
+          align-items: center;
+        }
+        &_chevron {
+          display: flex;
+          transform: rotate(180deg);
+          transition: .35s;
+        }
+      }
+    }
+    > .form_collapsible_content {
+      display: none;
+      margin-left: 16px;
+    }
+    &-open {
+      > .form_collapsible_title {
+        > .form_collapsible {
+          &_chevron {
+            transform: rotate(0deg);
+          }
+        }
+      }
+      > .form_collapsible_content {
+        display: block;
+      }
+    }
+  }
+  &_checkboxList {
+    &_title {
+      padding: 7px 32px;
+    }
+    &_content {
+      padding: 0 32px;
+    }
+    > .form_checkboxList_title {
+      display: flex;
+      flex-direction: row;
+      border: 1px solid $color-primary-100;
+      .form_selectInputWrapper {
+        flex: 1 1 auto;
+      }
+      > .form_checkboxList {
+        &_chevronUp,
+        &_chevronDown {
+          cursor: pointer;
+        }
+        &_chevronUp {
+          display: none;
+        }
+        &_chevronDown {
+          // display: block;
+          display: flex;
+          width: 32px;
+          height: 32px;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+    > .form_checkboxList_content {
+      display: none;
+      background: $color-primary-50;
+      padding: 0 32px;
+    }
+    &_item {
+      display: flex;
+      position: relative;
+      flex-direction: row;
+      padding: 12px 24px;
+      @include size(padP) {
+        flex-direction: column;
+      }
+      .form_selectInputWrapper {
+        @include size(padP) {
+          margin-bottom: 8px;
+        }
+        &:last-child {
+          @include size(padP) {
+            margin-bottom: 0;
+          }
+        }
+      }
+      > * {
+        margin-right: 12px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      .form_input_wrapper {
+        flex: 1 1 auto;
+        max-width: inherit;
+      }
+      .button {
+        flex: 0 0 auto;
+        align-self: flex-start;
+      }
+      &_input {
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+        > * {
+          margin-right: 12px;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+    &-open {
+      > .form_checkboxList_title {
+        > .form_checkboxList {
+          &_chevronUp {
+            // display: block;
+            display: flex;
+            width: 32px;
+            height: 32px;
+            justify-content: center;
+            align-items: center;
+          }
+          &_chevronDown {
+            display: none;
+          }
+        }
+      }
+      > .form_checkboxList_content {
+        display: block;
+      }
+    }
+  }
+  &_search {
+    // &_label{
+    //   position: relative;
+    //   width: 100%;
+    //   height: 100%;
+    //   svg{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 0;
+    //     transform: translate(0,-50%);
+    //     z-index: 99;
+    //   }
+    // }
+    &_header {
+      margin-top: 24px;
+      &_row {
+        display: flex;
+        flex-direction: row;
+        @include size(padP) {
+          flex-wrap: wrap;
+        }
+        > * {
+          flex: 1 1 auto;
+
+          @include size(padP) {
+            flex: 0 0 100%;
+            margin-bottom: 8px;
+          }
+          &:last-child {
+            @include size(padP) {
+              margin-bottom: 0;
+            }
+          }
+          > * {
+            max-width: initial;
+          }
+        }
+        > *:first-child {
+          @include maxSize(padP) {
+            flex: 0 0 230px;
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+    &_content {
+      margin-top: 24px;
+      &_header {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 16px;
+        &_title {
+          flex: 1 1 auto;
+          margin: auto 0;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 22px;
+        }
+        &_subtitle {
+          font-weight: 400;
+          font-size: 16px;
+          text-decoration: none;
+          margin-left: 12px;
+        }
+        &_hint {
+          display: flex;
+          flex-direction: row;
+          a,
+          button {
+            white-space: nowrap;
+          }
+          a {
+            color: $color-primary-300;
+          }
+        }
+      }
+    }
+    &_empty {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 360px;
+      &_hint {
+        p {
+          text-align: center;
+        }
+        > * {
+          margin-bottom: 24px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    &_result {
+      margin: -12px;
+      > .form_searchCard {
+        display: inline-flex;
+        flex-direction: column;
+        width: calc(33% - 24px);
+        margin: 12px;
+      }
+      @include size(desktop-s) {
+        margin: -6px;
+        > .form_searchCard {
+          width: calc(33% - 12px);
+          margin: 6px;
+        }
+      }
+      @include size(padM) {
+        margin: -6px;
+        > .form_searchCard {
+          width: calc(50% - 12px);
+          margin: 6px;
+        }
+      }
+      @include size(padP) {
+        margin: -6px;
+        > .form_searchCard {
+          width: calc(100% - 12px);
+          margin: 6px;
+        }
+      }
+    }
+    &_detail {
+      display: flex;
+      flex-direction: row;
+      > .form_searchCard {
+        width: 228px;
+        margin-right: 12px;
+      }
+      &_content {
+        flex: 1 0 auto;
+        background-color: $color-primary-30;
+        padding: 24px;
+        border-radius: 8px;
+      }
+      @include size(padM) {
+        flex-direction: column;
+        > .form_searchCard {
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+  &_searchCard {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-primary-30;
+    padding: 24px;
+    border-radius: 8px;
+
+    //for IE11
+    @for $i from 0 through 100 {
+      &:nth-child(#{$i + 1}) {
+        grid-column: #{($i % 3) + 1};
+        grid-row: #{ceil(($i + 1)/3)};
+      }
+
+      &:nth-child(#{$i + 1}) {
+        @include size(padM) {
+          grid-column: #{($i % 2) + 1};
+          grid-row: #{ceil(($i + 1)/2)};
+        }
+      }
+    }
+
+    @include size(desktop-s) {
+      padding: 12px;
+      word-break: break-all;
+    }
+    @include size(pad) {
+      width: auto;
+    }
+    &-active {
+      border: 2px solid $color-primary-300;
+    }
+    > * {
+      margin-bottom: 24px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &_image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        filter: drop-shadow(0px 6px 9px rgba(51, 51, 51, 0.15));
+        @include size(desktop-s) {
+          height: auto;
+          width: 100%;
+          max-width: 180px;
+        }
+        @include size(padP) {
+          width: 100px;
+        }
+      }
+    }
+    &_title {
+      font-size: 20px;
+      line-height: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    &_wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 auto;
+    }
+    &_content {
+      flex: 1 0 auto;
+      @include size(padP) {
+        margin-bottom: 4px;
+      }
+      .form_trademark {
+        flex-direction: column;
+        &_image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 0;
+          margin-bottom: 24px;
+        }
+        &_title {
+          text-align: center;
+        }
+        @include size(padP) {
+          flex-direction: row;
+          &_image {
+            display: block;
+            margin-right: 24px;
+            margin-bottom: 0;
+          }
+          &_title {
+            text-align: left;
+          }
+        }
+      }
+    }
+    & &_content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      time,
+      p {
+        padding: 0;
+      }
+      h1 {
+        font-weight: 700;
+        font-style: normal;
+        font-size: 20px;
+        line-height: 22px;
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-weight: 700;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 26px;
+        margin-top: -6px;
+        margin-bottom: 0;
+      }
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: normal;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 26px;
+      }
+      time,
+      p {
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 8px;
+        &.contentOverflow {
+          overflow:hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; //行數
+          -webkit-box-orient: vertical;
+          white-space: normal;
+        }
+      }
+      time {
+        @include size(padP) {
+          &::before {
+            content: '送件時間';
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+    &_row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 14px;
+
+      @include size(padP) {
+        margin-bottom: 4px;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &_title {
+        width: 4rem;
+        margin-right: 16px;
+
+        @include size(desktop-s) {
+          flex: 0 0 4rem;
+          margin-right: 8px;
+        }
+      }
+      &_description {
+        @include size(desktop-s) {
+          flex: 1 1 auto;
+        }
+      }
+    }
+    &_footer {
+      display: flex;
+      justify-content: center;
+      justify-self: flex-end;
+      font-size: 18px;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  &_searchCategoryResult {
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      tr {
+        td,
+        th {
+          padding: 12px;
+          &:nth-child(1) {
+            text-align: center;
+            vertical-align: middle;
+          }
+          .form_selectInputWrapper {
+            display: inline-flex;
+          }
+          a {
+            color: $color-primary-300;
+            text-decoration: underline;
+          }
+        }
+        th {
+          text-align: left;
+        }
+      }
+      thead {
+        background-color: $color-primary-100;
+        border: 1px solid $color-primary-100;
+        th:nth-child(1) {
+          border: 1px solid $color-primary-100;
+          border-right: none;
+          border-top-left-radius: 6px;
+          padding-left: 24px;
+          width: 8%;
+        }
+        th:nth-child(2) {
+          border: 1px solid $color-primary-100;
+          border-right: none;
+          border-left: none;
+          width: 27%;
+        }
+        th:nth-last-child(1) {
+          border: 1px solid $color-primary-100;
+          border-left: none;
+          border-top-right-radius: 6px;
+          width: 65%;
+        }
+      }
+      tbody {
+        td:nth-child(1) {
+          border: 1px solid $color-primary-100;
+          border-right: none;
+          border-top: none;
+          padding-left: 24px;
+          width: 8%;
+        }
+        td:nth-child(2) {
+          border: 1px solid $color-primary-100;
+          border-right: none;
+          border-left: none;
+          border-top: none;
+          width: 27%;
+        }
+        td:nth-last-child(1) {
+          border: 1px solid $color-primary-100;
+          border-left: none;
+          border-top: none;
+          width: 65%;
+        }
+      }
+      p {
+        margin-bottom: 8px;
+        line-height: 26px;
+      }
+    }
+  }
+  &_dropdown {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 8px;
+    background: #fff;
+    box-shadow: 0px 8px 11px rgba(184, 209, 230, 0.4);
+    z-index: 1;
+
+    .form_dropdown_item {
+      a {
+        display: block;
+        padding: 16px;
+        color: $color-text-700;
+        font-size: 20px;
+        line-height: 22px;
+        text-decoration: none;
+        &:hover {
+          color: $color-primary-300;
+          background-color: $color-primary-30;
+        }
+        &:active {
+          color: $color-primary-300;
+        }
+      }
+      &-active {
+        a {
+          color: $color-primary-300;
+        }
+      }
+    }
+  }
+  &_trademark {
+    display: flex;
+    flex-direction: row;
+    &_image {
+      margin-right: 42px;
+
+      @include size(padP) {
+        margin-right: 24px;
+      }
+      img {
+        width: 180px;
+        height: 180px;
+        filter: drop-shadow(0px 6px 9px rgba(51, 51, 51, 0.15));
+
+        @include size(padP) {
+          width: 130px;
+          height: 130px;
+        }
+      }
+    }
+    &_title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 22px;
+      margin-bottom: 16px;
+    }
+    &_row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 8px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &_title,
+      &_description {
+        line-height: 22px;
+      }
+      &_title {
+        color: $color-text-200;
+        width: 4rem;
+        margin-right: 40px;
+
+        @include size(padP) {
+          margin-right: 16px;
+        }
+      }
+      &_description {
+      }
+    }
+  }
+  &_applicationWrapper {
+    width: 100%;
+  }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  height: 0;
+  width: 0;
+}
