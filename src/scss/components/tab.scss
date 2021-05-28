@@ -1,0 +1,61 @@
+.tab {
+  // 客製化的 jQuery UI 樣式
+  &.ui-widget {
+    font-family: inherit;
+    font-size: inherit;
+  }
+  &.ui-widget-content {
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+  &.ui-tabs {
+    padding: 0;
+    .ui-tabs-nav {
+      margin: 0;
+      padding: 0;
+      li {
+        padding-top: 16px;
+        padding-bottom: 12px;
+        border-bottom: 4px solid transparent;
+        margin: 0;
+        margin-right: 40px;
+        &:last-child {
+          margin-right: 0;
+        }
+        &.ui-tabs-active {
+          border-bottom: 4px solid $color-primary-400;
+        }
+        .ui-tabs-anchor {
+          padding: 0;
+        }
+      }
+    }
+    .ui-widget-header {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-weight: inherit;
+      .ui-state-default {
+        border: 0;
+        background: transparent;
+        font-weight: inherit;
+      }
+      .ui-state-active {
+        border: 0;
+        background: transparent;
+        font-weight: inherit;
+        color: inherit;
+        a {
+          color: inherit;
+          &:focus {
+            outline: inherit;
+          }
+        }
+      }
+    }
+    .ui-tabs-panel {
+      padding: 0;
+    }
+  }
+}
