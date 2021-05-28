@@ -1,7 +1,11 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import cx from "classnames";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
+const modalRoot = document.getElementById('modal');
 
 const Background = styled.div.attrs({
   className: 'modal_background',
@@ -27,20 +31,44 @@ const Content = styled.div.attrs({
   className: 'modal_content',
 })``;
 
+class ModalParent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.el = document.createElement('div');
+  }
+
+  componentDidMount() {
+    modalRoot.appendChild(this.el);
+  }
+
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
+
+  render() {
+    const { open } = this.props;
+    const classes = cx(
+      'modal',
+      { 'modal-open': open },
+    );
+    this.el.className = classes;
+
+    return ReactDOM.createPortal(
+      this.props.children,
+      this.el,
+    );
+  }
+}
+
 export const Modal = ({
   className,
   open = false,
   title,
   children,
-  ...props
 }) => {
-  const classes = cx(
-    'modal',
-    { 'modal-open': open },
-  );
 
   return (
-    <div className={classes} {...props}>
+    <ModalParent open={open}>
       <Background />
       <Wrapper>
         <Header>
@@ -51,6 +79,6 @@ export const Modal = ({
         </Header>
         <Content>{children}</Content>
       </Wrapper>
-    </div>
+    </ModalParent>
   );
 };
