@@ -4,3 +4,4 @@ export * as SubModal from "./SubModal";
 export { Modal } from "./Modal";
 export * as Tab from "./Tab";
 export { Dropdown } from "./Dropdown";
+export { Tag } from "./Tag";
