@@ -5,3 +5,4 @@ export { Modal } from "./Modal";
 export * as Tab from "./Tab";
 export { Dropdown } from "./Dropdown";
 export { Tag } from "./Tag";
+export { TaggedSearch } from "./TaggedSearch";
