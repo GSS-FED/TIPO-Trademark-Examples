@@ -1,11 +1,27 @@
-import styled from "styled-components";
-import { Modal, Tab } from "../components";
+import { useState } from "react";
+import { Modal, Tab, Dropdown, TaggedSearch } from "../components";
 
-const Box = styled.div`
-  padding: 80px 0px;
-`;
+const categoryOptions = [
+  {
+    key: 'by_product_name',
+    text: '商品名稱類別',
+    value: 'by_product_name',
+  },
+  {
+    key: 'by_industry',
+    text: '產業別',
+    value: 'by_industry',
+  },
+  {
+    key: 'batch_input',
+    text: '批次輸入',
+    value: 'batch_input',
+  },
+];
 
 export const NewCategoryApp = () => {
+  const [option, setOption] = useState('batch_input');
+
   return (
     <Modal open title="新增類別">
       <Tab.Container>
@@ -18,7 +34,14 @@ export const NewCategoryApp = () => {
           </Tab.Item>
         </Tab.List>
         <Tab.Page id="#newCategory_new">
-          <Box>This is a modal.</Box>
+          <Dropdown
+            options={categoryOptions}
+            value={option}
+            onChange={(evt, data) => {
+              setOption(data.value);
+            }}
+          />
+          <TaggedSearch />
         </Tab.Page>
       </Tab.Container>
     </Modal>
