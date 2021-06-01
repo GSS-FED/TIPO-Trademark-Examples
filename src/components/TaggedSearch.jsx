@@ -40,6 +40,8 @@ const Container = styled.div`
   }
 `;
 
+// 雖然 Semantic UI React 有提供 multiple selection 的 dropdown ，
+// 但為了迎合既有的樣式，在這裡選擇先自幹
 export const TaggedSearch = ({
   id,
   className,
