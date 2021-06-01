@@ -46,10 +46,13 @@ class ModalParent extends React.Component {
   }
 
   render() {
-    const { open } = this.props;
+    const { open, clear } = this.props;
     const classes = cx(
       'modal',
-      { 'modal-open': open },
+      {
+        'modal-open': open,
+        'modal-clear': clear,
+      },
     );
     this.el.className = classes;
 
@@ -63,12 +66,13 @@ class ModalParent extends React.Component {
 export const Modal = ({
   className,
   open = false,
+  clear = false,
   title,
   children,
 }) => {
 
   return (
-    <ModalParent open={open}>
+    <ModalParent open={open} clear={clear}>
       <Background />
       <Wrapper>
         <Header>
