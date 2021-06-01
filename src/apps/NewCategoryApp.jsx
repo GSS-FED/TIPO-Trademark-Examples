@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 import { Modal, Tab, Dropdown, TaggedSearch } from "../components";
 
 const categoryOptions = [
@@ -19,11 +20,25 @@ const categoryOptions = [
   },
 ];
 
+const StyledTaggedSearch = styled(TaggedSearch)``;
+
+const NewCategoryPage = styled(Tab.Page).attrs({
+  id: 'newCategory_new',
+})`
+  ${Dropdown} {
+    margin-top: 24px;
+  };
+
+  ${StyledTaggedSearch} {
+    margin-top: 8px;
+  }
+`;
+
 export const NewCategoryApp = () => {
   const [option, setOption] = useState('batch_input');
 
   return (
-    <Modal open title="新增類別">
+    <Modal open clear title="新增類別">
       <Tab.Container>
         <Tab.List>
           <Tab.Item actived>
@@ -33,7 +48,7 @@ export const NewCategoryApp = () => {
             <Tab.Link herf="#newCategory_template">參考其他商標</Tab.Link>
           </Tab.Item>
         </Tab.List>
-        <Tab.Page id="#newCategory_new">
+        <NewCategoryPage>
           <Dropdown
             options={categoryOptions}
             value={option}
@@ -41,8 +56,8 @@ export const NewCategoryApp = () => {
               setOption(data.value);
             }}
           />
-          <TaggedSearch />
-        </Tab.Page>
+          <StyledTaggedSearch />
+        </NewCategoryPage>
       </Tab.Container>
     </Modal>
   );
