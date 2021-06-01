@@ -4,7 +4,7 @@ import { Tag } from "./Tag";
 import { Button } from "./Button";
 
 const TaggedInput = styled.div.attrs({
-  className: 'form_taggedInput',
+  className: "form_taggedInput",
 })`
   background-color: #fff;
 `;
@@ -17,7 +17,7 @@ const Input = styled.input.attrs({
 `;
 
 const SubmitButton = styled(Button).attrs({
-  type: 'record',
+  type: "record",
 })``;
 
 const Container = styled.div`
@@ -42,84 +42,83 @@ const Container = styled.div`
 
 // 雖然 Semantic UI React 有提供 multiple selection 的 dropdown ，
 // 但為了迎合既有的樣式，在這裡選擇先自幹
-export const TaggedSearch = ({
-  id,
-  className,
-  onSubmit,
-}) => {
-  const [value, setValue] = useState('');
+export const TaggedSearch = ({ id, className, onSubmit }) => {
+  const [value, setValue] = useState("");
   const [tags, setTags] = useState([]);
 
-  const handleKeyDown = useCallback((evt) => {
-    switch (evt.key) {
-      case 'Backspace':
-        if (value === '') {
-          const newTags = tags.slice(0, -1);
-          setTags(newTags);
-        }
-        break;
-      default:
-    }
-  }, [value, tags]);
+  const handleKeyDown = useCallback(
+    (evt) => {
+      switch (evt.key) {
+        case "Backspace":
+          if (value === "") {
+            const newTags = tags.slice(0, -1);
+            setTags(newTags);
+          }
+          break;
+        default:
+      }
+    },
+    [value, tags]
+  );
 
   const handleChange = useCallback((evt) => {
     setValue(evt.target.value);
   }, []);
 
-  const handleKeyUp = useCallback((evt) => {
-    switch (evt.key) {
-      case ',':
-      case ';': {
-        let i;
-        for (i = 0; i < value.length; ++i) {
-          if (value[i] === ',' || value[i] === ';') {
-            break;
+  const handleKeyUp = useCallback(
+    (evt) => {
+      switch (evt.key) {
+        case ",":
+        case ";": {
+          let i;
+          for (i = 0; i < value.length; ++i) {
+            if (value[i] === "," || value[i] === ";") {
+              break;
+            }
           }
+          const tag = value.substring(0, i).trim();
+          if (tag) {
+            const newTags = [...tags, tag];
+            setTags(newTags);
+            const rest = value.substring(i + 1);
+            setValue(rest);
+          }
+          break;
         }
-        const tag = value.substring(0, i).trim();
-        if (tag) {
-          const newTags = [...tags, tag];
-          setTags(newTags);
-          const rest = value.substring(i + 1);
-          setValue(rest);
+        case "Enter": {
+          const tag = value.trim();
+          if (tag) {
+            const newTags = [...tags, tag];
+            setTags(newTags);
+            setValue("");
+          }
+          break;
         }
-        break;
+        default:
       }
-      case 'Enter': {
-        const tag = value.trim();
-        if (tag) {
-          const newTags = [...tags, tag];
-          setTags(newTags);
-          setValue('');
-        }
-        break;
-      }
-      default:
-    }
-  }, [value, tags]);
+    },
+    [value, tags]
+  );
 
   const handleSubmit = useCallback(() => {
-    if (typeof onSubmit !== 'function') return;
+    if (typeof onSubmit !== "function") return;
     onSubmit(tags);
   }, [onSubmit, tags]);
 
   return (
     <Container id={id} className={className}>
       <TaggedInput>
-        {tags.map((text, i) =>
+        {tags.map((text, i) => (
           <Tag
             key={i}
             onClose={() => {
-              const newTags = [
-                ...tags.slice(0, i),
-                ...tags.slice(i + 1),
-              ];
+              const newTags = [...tags.slice(0, i), ...tags.slice(i + 1)];
               setTags(newTags);
             }}
           >
             {text}
           </Tag>
-        )}
+        ))}
         <Input
           placeholder="請用分號（；）區隔名稱。如：甲；乙；丙"
           value={value}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div.attrs({
-  className: "modal_subModal_wrapper"
+  className: "modal_subModal_wrapper",
 })``;
 
 export function Header({ title, children }) {
@@ -14,9 +14,9 @@ export function Header({ title, children }) {
 }
 
 export const Body = styled.div.attrs({
-  className: "modal_subModal_body "
+  className: "modal_subModal_body ",
 })``;
 
 export const Footer = styled.div.attrs({
-  className: "modal_subModal_footer"
+  className: "modal_subModal_footer",
 })``;

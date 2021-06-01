@@ -288,7 +288,7 @@ body {
       &::before {
         position: absolute;
         display: block;
-        content: '';
+        content: "";
         left: 0;
         top: 0;
         right: 0;
@@ -302,7 +302,7 @@ body {
           box-sizing: border-box;
           position: absolute;
           display: block;
-          content: '';
+          content: "";
           width: 46px;
           height: 46px;
           border-width: 0;
@@ -343,7 +343,7 @@ body {
       &::before {
         position: absolute;
         display: block;
-        content: '';
+        content: "";
         left: 0;
         top: 0;
         right: 0;
@@ -619,7 +619,7 @@ body {
         font-size: 12px;
         z-index: 40;
         @include size(phone) {
-          content: '請在此空白區域內寫下您的姓名';
+          content: "請在此空白區域內寫下您的姓名";
         }
       }
 
@@ -638,7 +638,7 @@ body {
           bottom: 0;
           right: 0;
           &:after {
-            content: '請於空白處簽名，完成後請將手機直放以完成簽名';
+            content: "請於空白處簽名，完成後請將手機直放以完成簽名";
           }
         }
       }
@@ -785,12 +785,12 @@ body {
         align-self: flex-start;
       }
     }
-    &_footer{
+    &_footer {
       display: flex;
       justify-content: space-between;
       margin-top: 15px;
-      button{
-        position: static!important;
+      button {
+        position: static !important;
       }
     }
   }

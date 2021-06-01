@@ -33,7 +33,9 @@ export function SubModalApp() {
       </SubModal.Body>
       <SubModal.Footer>
         <Button type="record">取消</Button>
-        <Button step type="primary">確定</Button>
+        <Button step type="primary">
+          確定
+        </Button>
       </SubModal.Footer>
     </SubModal.Wrapper>
   );

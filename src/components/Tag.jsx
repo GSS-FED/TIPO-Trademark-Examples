@@ -7,13 +7,8 @@ const Container = styled.div`
   line-height: 1.5;
 `;
 
-export const Tag = ({
-  id,
-  className,
-  children,
-  onClose,
-}) => {
-  const classes = cx('form_tag', className);
+export const Tag = ({ id, className, children, onClose }) => {
+  const classes = cx("form_tag", className);
 
   return (
     <Container id={id} className={classes}>

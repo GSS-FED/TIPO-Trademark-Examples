@@ -15,7 +15,7 @@ export interface Category {
 export const empty: Category = {
   id: "000",
   title: "...",
-  subcategories: []
+  subcategories: [],
 };
 
 export function isNode(node: Category | CategoryNode): node is CategoryNode {

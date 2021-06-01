@@ -8,7 +8,7 @@ function Collapsed({
   className = "",
   title = "",
   defaultOpen = false,
-  children
+  children,
 }) {
   const [isCollapsed, setIsCollapsed] = useState(defaultOpen);
   const classes = cx(

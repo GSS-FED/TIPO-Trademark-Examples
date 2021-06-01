@@ -423,7 +423,7 @@
       position: relative;
       max-width: 470px;
       width: 60%;
-      .form_search_content &{
+      .form_search_content & {
         max-width: 100%;
         width: 100%;
       }
@@ -611,13 +611,13 @@
             content: none;
           }
         }
-        input[type=radio] + .form_radio {
+        input[type="radio"] + .form_radio {
           display: none;
         }
-        input[type=radio] + .form_radio + span {
+        input[type="radio"] + .form_radio + span {
           display: none;
         }
-        input[type=radio]:checked + .form_radio + span {
+        input[type="radio"]:checked + .form_radio + span {
           display: inline;
         }
       }
@@ -1173,7 +1173,7 @@
         &_chevron {
           display: flex;
           transform: rotate(180deg);
-          transition: .35s;
+          transition: 0.35s;
         }
       }
     }
@@ -1580,7 +1580,7 @@
         line-height: 22px;
         margin-bottom: 8px;
         &.contentOverflow {
-          overflow:hidden;
+          overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-line-clamp: 2; //行數
@@ -1591,7 +1591,7 @@
       time {
         @include size(padP) {
           &::before {
-            content: '送件時間';
+            content: "送件時間";
             margin-right: 0.5rem;
           }
         }

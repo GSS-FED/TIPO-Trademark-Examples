@@ -5,7 +5,7 @@ import Select from "./Select";
 export default function CategoryListSelector({
   categories = [],
   selected = [],
-  onChange
+  onChange,
 }) {
   const selectMap = useMemo(() => {
     let result = {};
@@ -39,7 +39,7 @@ export default function CategoryListSelector({
             onChange={(checked) => {
               const newMap = {
                 ...selectMap,
-                [cat.id]: checked
+                [cat.id]: checked,
               };
               handleChange(newMap);
               return newMap;

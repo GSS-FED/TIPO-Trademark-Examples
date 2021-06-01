@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import * as S from 'semantic-ui-react';
+import styled from "styled-components";
+import * as S from "semantic-ui-react";
 
 export const Dropdown = styled(S.Dropdown)`
   box-sizing: border-box;
@@ -20,4 +20,3 @@ export const Dropdown = styled(S.Dropdown)`
     width: 100%;
   }
 `;
-

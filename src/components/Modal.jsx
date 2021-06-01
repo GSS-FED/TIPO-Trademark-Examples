@@ -5,36 +5,36 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const modalRoot = document.getElementById('modal');
+const modalRoot = document.getElementById("modal");
 
 const Background = styled.div.attrs({
-  className: 'modal_background',
+  className: "modal_background",
 })``;
 
 const Wrapper = styled.div.attrs({
-  className: 'modal_wrapper',
+  className: "modal_wrapper",
 })``;
 
 const Header = styled.div.attrs({
-  className: 'modal_header',
+  className: "modal_header",
 })``;
 
 const Title = styled.div.attrs({
-  className: 'modal_title',
+  className: "modal_title",
 })``;
 
 const Close = styled.div.attrs({
-  className: 'modal_close',
+  className: "modal_close",
 })``;
 
 const Content = styled.div.attrs({
-  className: 'modal_content',
+  className: "modal_content",
 })``;
 
 class ModalParent extends React.Component {
   constructor(props) {
     super(props);
-    this.el = document.createElement('div');
+    this.el = document.createElement("div");
   }
 
   componentDidMount() {
@@ -47,19 +47,13 @@ class ModalParent extends React.Component {
 
   render() {
     const { open, clear } = this.props;
-    const classes = cx(
-      'modal',
-      {
-        'modal-open': open,
-        'modal-clear': clear,
-      },
-    );
+    const classes = cx("modal", {
+      "modal-open": open,
+      "modal-clear": clear,
+    });
     this.el.className = classes;
 
-    return ReactDOM.createPortal(
-      this.props.children,
-      this.el,
-    );
+    return ReactDOM.createPortal(this.props.children, this.el);
   }
 }
 
@@ -70,7 +64,6 @@ export const Modal = ({
   title,
   children,
 }) => {
-
   return (
     <ModalParent open={open} clear={clear}>
       <Background />

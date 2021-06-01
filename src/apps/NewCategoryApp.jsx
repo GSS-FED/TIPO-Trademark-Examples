@@ -4,30 +4,30 @@ import { Modal, Tab, Dropdown, TaggedSearch } from "../components";
 
 const categoryOptions = [
   {
-    key: 'by_product_name',
-    text: '商品名稱類別',
-    value: 'by_product_name',
+    key: "by_product_name",
+    text: "商品名稱類別",
+    value: "by_product_name",
   },
   {
-    key: 'by_industry',
-    text: '產業別',
-    value: 'by_industry',
+    key: "by_industry",
+    text: "產業別",
+    value: "by_industry",
   },
   {
-    key: 'batch_input',
-    text: '批次輸入',
-    value: 'batch_input',
+    key: "batch_input",
+    text: "批次輸入",
+    value: "batch_input",
   },
 ];
 
 const StyledTaggedSearch = styled(TaggedSearch)``;
 
 const NewCategoryPage = styled(Tab.Page).attrs({
-  id: 'newCategory_new',
+  id: "newCategory_new",
 })`
   ${Dropdown} {
     margin-top: 24px;
-  };
+  }
 
   ${StyledTaggedSearch} {
     margin-top: 8px;
@@ -35,7 +35,7 @@ const NewCategoryPage = styled(Tab.Page).attrs({
 `;
 
 export const NewCategoryApp = () => {
-  const [option, setOption] = useState('batch_input');
+  const [option, setOption] = useState("batch_input");
 
   return (
     <Modal open clear title="新增類別">
