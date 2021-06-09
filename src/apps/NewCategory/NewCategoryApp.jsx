@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Modal, Tab, Dropdown, TaggedSearch } from "../components";
+import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
+import * as SearchContent from "./SearchContent";
+import { SearchCategoryResult } from "./SearchCategoryResult";
 
 const categoryOptions = [
   {
@@ -20,6 +22,21 @@ const categoryOptions = [
   },
 ];
 
+const products = [
+  {
+    name: "咖啡素",
+    category: undefined,
+  },
+  {
+    name: "咖啡",
+    category: undefined,
+  },
+  {
+    name: "茶",
+    category: undefined,
+  },
+];
+
 const StyledTaggedSearch = styled(TaggedSearch)``;
 
 const NewCategoryPage = styled(Tab.Page).attrs({
@@ -32,6 +49,10 @@ const NewCategoryPage = styled(Tab.Page).attrs({
   ${StyledTaggedSearch} {
     margin-top: 8px;
   }
+`;
+
+const SearchResult = styled.div`
+  margin-top: 24px;
 `;
 
 export const NewCategoryApp = () => {
@@ -57,6 +78,12 @@ export const NewCategoryApp = () => {
             }}
           />
           <StyledTaggedSearch />
+          <SearchResult>
+            <SearchContent.Header hint={<a href=".">商品及服務分類對照表</a>}>
+              批次對應結果
+            </SearchContent.Header>
+            <SearchCategoryResult data={products} />
+          </SearchResult>
         </NewCategoryPage>
       </Tab.Container>
     </Modal>
