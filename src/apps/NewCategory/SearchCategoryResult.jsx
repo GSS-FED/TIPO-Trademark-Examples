@@ -1,4 +1,5 @@
 import cx from "classnames";
+import { Checkbox } from "../../components";
 
 export const SearchCategoryResult = ({ id, className, data = [] }) => {
   const classes = cx("form_searchCategoryResult", className);
@@ -22,10 +23,7 @@ export const SearchCategoryResult = ({ id, className, data = [] }) => {
           {data.map((product, i) => (
             <tr key={i}>
               <td>
-                <label class="form_selectInputWrapper">
-                  <input type="checkbox" />
-                  <span class="form_checkbox"></span>
-                </label>
+                <Checkbox />
               </td>
               <td>{product.name}</td>
               <td>
