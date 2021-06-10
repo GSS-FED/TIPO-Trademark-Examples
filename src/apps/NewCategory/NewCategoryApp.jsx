@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
+import { CategorySubModal } from "./CategorySubModal";
 import * as SearchContent from "./SearchContent";
 import { SearchCategoryResult } from "./SearchCategoryResult";
 
@@ -65,10 +66,10 @@ const SearchResult = styled.div`
 `;
 
 export const NewCategoryApp = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const [option, setOption] = useState("batch_input");
   const [tags, setTags] = useState([]);
   const [products, setProducts] = useState([]);
-  console.log(products);
 
   const updateProduct = useCallback(
     (product) => {
@@ -107,10 +108,18 @@ export const NewCategoryApp = () => {
             <SearchContent.Header hint={<a href=".">商品及服務分類對照表</a>}>
               批次對應結果
             </SearchContent.Header>
-            <SearchCategoryResult data={products} />
+            <SearchCategoryResult
+              data={products}
+              onCategorySelect={(product) => setModalOpen(true)}
+            />
           </SearchResult>
         </NewCategoryPage>
       </Tab.Container>
+      <CategorySubModal
+        open={isModalOpen}
+        onCancel={() => setModalOpen(false)}
+        onSubmit={() => setModalOpen(false)}
+      />
     </Container>
   );
 };

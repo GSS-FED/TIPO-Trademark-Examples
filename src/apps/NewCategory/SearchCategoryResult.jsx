@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import cx from "classnames";
 import styled from "styled-components";
 import { Checkbox } from "../../components";
@@ -17,7 +18,12 @@ const EmptyTable = styled.div`
   border-bottom-right-radius: 4px;
 `;
 
-export const SearchCategoryResult = ({ id, className, data = [] }) => {
+export const SearchCategoryResult = ({
+  id,
+  className,
+  data = [],
+  onCategorySelect,
+}) => {
   const classes = cx("form_searchCategoryResult", className);
 
   return (
@@ -44,7 +50,16 @@ export const SearchCategoryResult = ({ id, className, data = [] }) => {
                 </td>
                 <td>{product.name}</td>
                 <td>
-                  <a href=".">請選擇自訂類別</a>
+                  <a
+                    href="."
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      if (typeof onCategorySelect !== "function") return;
+                      onCategorySelect(product);
+                    }}
+                  >
+                    請選擇自訂類別
+                  </a>
                 </td>
               </tr>
             ))}
