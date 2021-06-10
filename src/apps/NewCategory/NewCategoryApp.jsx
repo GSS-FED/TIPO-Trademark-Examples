@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
 import * as SearchContent from "./SearchContent";
@@ -37,6 +37,15 @@ const products = [
   },
 ];
 
+const tagToProduct = (tag) => ({
+  name: tag,
+  category: undefined,
+});
+
+const Container = styled(Modal)`
+  position: relative;
+`;
+
 const StyledTaggedSearch = styled(TaggedSearch)``;
 
 const NewCategoryPage = styled(Tab.Page).attrs({
@@ -57,9 +66,25 @@ const SearchResult = styled.div`
 
 export const NewCategoryApp = () => {
   const [option, setOption] = useState("batch_input");
+  const [tags, setTags] = useState([]);
+  const [products, setProducts] = useState([]);
+  console.log(products);
+
+  const updateProduct = useCallback(
+    (product) => {
+      let i = products.findIndex((p) => p.name === product.name);
+      if (i === -1) i = products.length;
+      setProducts([...products.slice(0, i), product, ...products.slice(i + 1)]);
+    },
+    [products]
+  );
+
+  useEffect(() => {
+    setProducts(tags.map(tagToProduct));
+  }, [tags]);
 
   return (
-    <Modal open clear title="新增類別">
+    <Container open clear title="新增類別">
       <Tab.Container>
         <Tab.List>
           <Tab.Item actived>
@@ -77,7 +102,7 @@ export const NewCategoryApp = () => {
               setOption(data.value);
             }}
           />
-          <StyledTaggedSearch />
+          <StyledTaggedSearch onSubmit={setTags} />
           <SearchResult>
             <SearchContent.Header hint={<a href=".">商品及服務分類對照表</a>}>
               批次對應結果
@@ -86,6 +111,6 @@ export const NewCategoryApp = () => {
           </SearchResult>
         </NewCategoryPage>
       </Tab.Container>
-    </Modal>
+    </Container>
   );
 };
