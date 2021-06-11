@@ -19,7 +19,7 @@ export const Checkbox = ({
   return (
     <label id={id} className={classes} {...props}>
       <input type="checkbox" checked={checked} onChange={handleChange} />
-      <span class="form_checkbox">{children}</span>
+      <span className="form_checkbox">{children}</span>
     </label>
   );
 };

@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import cx from "classnames";
 import styled from "styled-components";
 import { Checkbox } from "../../components";

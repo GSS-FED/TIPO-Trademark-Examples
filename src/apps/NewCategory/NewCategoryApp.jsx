@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, /* useCallback, */ useEffect } from "react";
 import styled from "styled-components";
 import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
 import { CategorySubModal } from "./CategorySubModal";
@@ -20,21 +20,6 @@ const categoryOptions = [
     key: "batch_input",
     text: "批次輸入",
     value: "batch_input",
-  },
-];
-
-const products = [
-  {
-    name: "咖啡素",
-    category: undefined,
-  },
-  {
-    name: "咖啡",
-    category: undefined,
-  },
-  {
-    name: "茶",
-    category: undefined,
   },
 ];
 
@@ -71,6 +56,7 @@ export const NewCategoryApp = () => {
   const [tags, setTags] = useState([]);
   const [products, setProducts] = useState([]);
 
+  /*
   const updateProduct = useCallback(
     (product) => {
       let i = products.findIndex((p) => p.name === product.name);
@@ -79,6 +65,7 @@ export const NewCategoryApp = () => {
     },
     [products]
   );
+  */
 
   useEffect(() => {
     setProducts(tags.map(tagToProduct));
