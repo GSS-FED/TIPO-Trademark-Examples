@@ -49,16 +49,20 @@ export const SearchCategoryResult = ({
                 </td>
                 <td>{product.name}</td>
                 <td>
-                  <a
-                    href="."
-                    onClick={(evt) => {
-                      evt.preventDefault();
-                      if (typeof onCategorySelect !== "function") return;
-                      onCategorySelect(product);
-                    }}
-                  >
-                    請選擇自訂類別
-                  </a>
+                  {product.category !== undefined ? (
+                    <span>{product.category.title}</span>
+                  ) : (
+                    <a
+                      href="."
+                      onClick={(evt) => {
+                        evt.preventDefault();
+                        if (typeof onCategorySelect !== "function") return;
+                        onCategorySelect(product);
+                      }}
+                    >
+                      請選擇自訂類別
+                    </a>
+                  )}
                 </td>
               </tr>
             ))}

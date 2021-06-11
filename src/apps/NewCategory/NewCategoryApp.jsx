@@ -1,9 +1,10 @@
-import { useState, /* useCallback, */ useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
 import { CategorySubModal } from "./CategorySubModal";
 import * as SearchContent from "./SearchContent";
 import { SearchCategoryResult } from "./SearchCategoryResult";
+import * as API from "../../api";
 
 const categoryOptions = [
   {
@@ -55,8 +56,9 @@ export const NewCategoryApp = () => {
   const [option, setOption] = useState("batch_input");
   const [tags, setTags] = useState([]);
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState();
 
-  /*
   const updateProduct = useCallback(
     (product) => {
       let i = products.findIndex((p) => p.name === product.name);
@@ -65,11 +67,14 @@ export const NewCategoryApp = () => {
     },
     [products]
   );
-  */
 
   useEffect(() => {
     setProducts(tags.map(tagToProduct));
   }, [tags]);
+
+  useEffect(() => {
+    API.categories().then(setCategories);
+  }, []);
 
   return (
     <Container open clear title="新增類別">
@@ -97,15 +102,26 @@ export const NewCategoryApp = () => {
             </SearchContent.Header>
             <SearchCategoryResult
               data={products}
-              onCategorySelect={(product) => setModalOpen(true)}
+              onCategorySelect={(product) => {
+                setCurrentProduct(product);
+                setModalOpen(true);
+              }}
             />
           </SearchResult>
         </NewCategoryPage>
       </Tab.Container>
       <CategorySubModal
         open={isModalOpen}
-        onCancel={() => setModalOpen(false)}
-        onSubmit={() => setModalOpen(false)}
+        categories={categories}
+        onCancel={() => {
+          setCurrentProduct();
+          setModalOpen(false);
+        }}
+        onSubmit={(category) => {
+          updateProduct({ ...currentProduct, category });
+          setCurrentProduct();
+          setModalOpen(false);
+        }}
       />
     </Container>
   );
