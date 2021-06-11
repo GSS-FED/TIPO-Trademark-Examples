@@ -1,5 +1,7 @@
 import cx from "classnames";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../../components";
 
 const EmptyTable = styled.div`
@@ -15,6 +17,13 @@ const EmptyTable = styled.div`
   border-right: 1px solid #cce1ff;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+`;
+
+const Edit = styled.span`
+  display: inline-block;
+  margin-left: 1rem;
+  color: #66a5ff;
+  cursor: pointer;
 `;
 
 export const SearchCategoryResult = ({
@@ -50,7 +59,18 @@ export const SearchCategoryResult = ({
                 <td>{product.name}</td>
                 <td>
                   {product.category !== undefined ? (
-                    <span>{product.category.title}</span>
+                    <>
+                      <span>{product.category.title}</span>
+                      <Edit>
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          onClick={() => {
+                            if (typeof onCategorySelect !== "function") return;
+                            onCategorySelect(product);
+                          }}
+                        />
+                      </Edit>
+                    </>
                   ) : (
                     <a
                       href="."
@@ -60,7 +80,7 @@ export const SearchCategoryResult = ({
                         onCategorySelect(product);
                       }}
                     >
-                      請選擇自訂類別
+                      新增商品類別
                     </a>
                   )}
                 </td>

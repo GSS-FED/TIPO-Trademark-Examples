@@ -113,6 +113,7 @@ export const NewCategoryApp = () => {
       <CategorySubModal
         open={isModalOpen}
         categories={categories}
+        category={currentProduct && currentProduct.category}
         onCancel={() => {
           setCurrentProduct();
           setModalOpen(false);

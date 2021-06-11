@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { SubModal, Button, RadioList, Radio } from "../../components";
 
 export const CategorySubModal = ({
@@ -6,19 +6,32 @@ export const CategorySubModal = ({
   className,
   open,
   categories = [],
+  category,
   onCancel,
   onSubmit,
 }) => {
-  const [categoryId, setCategoryId] = useState();
-  const category = useMemo(
-    () => categories.find((cat) => cat.id === categoryId),
-    [categories, categoryId]
+  const [current, setCurrent] = useState(category);
+
+  const handleChange = useCallback(
+    (id) => {
+      const cat = categories.find((c) => c.id === id);
+      setCurrent(cat);
+    },
+    [categories]
   );
 
   const handleSubmit = useCallback(() => {
     if (typeof onSubmit !== "function") return;
-    onSubmit(category);
-  }, [onSubmit, category]);
+    onSubmit(current);
+  }, [onSubmit, current]);
+
+  useEffect(() => {
+    if (!category) {
+      setCurrent();
+      return;
+    }
+    setCurrent(category);
+  }, [categories, category]);
 
   return (
     <SubModal.Parent
@@ -30,7 +43,11 @@ export const CategorySubModal = ({
       <SubModal.Wrapper onClick={(evt) => evt.stopPropagation()}>
         <SubModal.Header>選擇商品服務名稱類別</SubModal.Header>
         <SubModal.Body>
-          <RadioList name="category" onChange={setCategoryId}>
+          <RadioList
+            name="category"
+            selected={current && current.id}
+            onChange={handleChange}
+          >
             {categories.map((cat) => (
               <Radio key={cat.id} value={cat.id}>
                 {cat.id} {cat.title}

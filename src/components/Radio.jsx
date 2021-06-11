@@ -38,8 +38,23 @@ const RadioListContainer = styled.div`
   }
 `;
 
-export const RadioList = ({ id, className, name, children, onChange }) => {
+export const RadioList = ({
+  id,
+  className,
+  name,
+  selected,
+  children,
+  onChange,
+}) => {
   const classes = cx("form_selectInputContainer", className);
+
+  const isChecked = useCallback(
+    (child) => {
+      if (!selected || !child || !child.props) return false;
+      return child.props.value === selected;
+    },
+    [selected]
+  );
 
   const handleChange = useCallback(
     (evt) => {
@@ -52,7 +67,11 @@ export const RadioList = ({ id, className, name, children, onChange }) => {
   return (
     <RadioListContainer id={id} className={classes}>
       {Children.map(children, (child) =>
-        cloneElement(child, { name, onChange: handleChange })
+        cloneElement(child, {
+          name,
+          checked: isChecked(child),
+          onChange: handleChange,
+        })
       )}
     </RadioListContainer>
   );
