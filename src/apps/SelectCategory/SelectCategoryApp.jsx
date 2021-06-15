@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Modal, Tab, Dropdown, Input } from "../../components";
+import {
+  Modal,
+  Tab,
+  Dropdown,
+  Input,
+  SearchContent,
+  CategoryList,
+} from "../../components";
+import * as API from "../../api";
 
 const categoryOptions = [
   {
@@ -41,10 +49,19 @@ const SelectCategoryPage = styled(Tab.Page).attrs({
   id: "newCategory_select",
 })``;
 
+const SearchResult = styled.div`
+  margin-top: 24px;
+`;
+
 export const SelectCategoryApp = () => {
   const history = useHistory();
+  const [categories, setCategories] = useState([]);
   const [option, setOption] = useState("by_product_name");
   const [keyword, setKeyword] = useState("");
+
+  useEffect(() => {
+    API.categories().then(setCategories);
+  }, []);
 
   return (
     <Container open clear title="新增類別" onCancel={() => history.push("/")}>
@@ -74,6 +91,23 @@ export const SelectCategoryApp = () => {
               }}
             />
           </CategorySearch>
+          <SearchResult>
+            <SearchContent.Header hint={<a href=".">商品及服務分類對照表</a>}>
+              商品
+            </SearchContent.Header>
+            <CategoryList.List>
+              {categories.map((cat) => (
+                <CategoryList.Item
+                  href={`#${cat.id}`}
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                  }}
+                >
+                  {cat.id} {cat.title}
+                </CategoryList.Item>
+              ))}
+            </CategoryList.List>
+          </SearchResult>
         </SelectCategoryPage>
       </Tab.Container>
     </Container>
