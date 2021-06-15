@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -62,10 +62,17 @@ export const SelectCategoryApp = () => {
   const [option, setOption] = useState("by_product_name");
   const [keyword, setKeyword] = useState("");
   const [currentCategory, setCurrentCategory] = useState(C.empty);
+  const [selected, setSelected] = useState([]);
+  const flattened = useMemo(() => C.flattenSelections(selected), [selected]);
+  console.log(flattened);
 
   useEffect(() => {
     API.categories().then(setCategories);
   }, []);
+
+  useEffect(() => {
+    setSelected(C.buildSelections(currentCategory));
+  }, [currentCategory]);
 
   return (
     <Container open clear title="新增類別" onCancel={() => history.push("/")}>
@@ -102,6 +109,7 @@ export const SelectCategoryApp = () => {
             <CategoryList.List>
               {categories.map((cat) => (
                 <CategoryList.Item
+                  key={cat.id}
                   href={`#${cat.id}`}
                   onClick={(evt) => {
                     evt.preventDefault();
@@ -119,10 +127,12 @@ export const SelectCategoryApp = () => {
       <CategorySubModal
         open={isModalOpen}
         category={currentCategory}
+        selected={selected}
         onCancel={() => {
           setModalOpen(false);
         }}
-        onSubmit={() => {
+        onSubmit={(selected) => {
+          setSelected(selected);
           setModalOpen(false);
         }}
       />

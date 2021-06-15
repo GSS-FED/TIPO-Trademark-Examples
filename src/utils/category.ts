@@ -32,3 +32,21 @@ export const getProducts = (cat: CategoryLeaf) => {
   if (!cat.content) return [];
   return cat.content.split("；").filter(notFalsy);
 };
+
+type SelectionTree = string[] | SelectionTree[];
+
+export const buildSelections = (cat: Category): SelectionTree => {
+  return cat.subcategories.map((c) => (isLeaf(c) ? [] : buildSelections(c)));
+};
+
+export const flattenSelections = (selected: SelectionTree): string[] => {
+  let result: string[] = [];
+  for (let x of selected) {
+    if (Array.isArray(x)) {
+      result = result.concat(flattenSelections(x));
+    } else {
+      result.push(x);
+    }
+  }
+  return result;
+};
