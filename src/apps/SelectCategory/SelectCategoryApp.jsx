@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Modal, Tab, Dropdown } from "../../components";
+import { Modal, Tab, Dropdown, Input } from "../../components";
 
 const categoryOptions = [
   {
@@ -25,17 +25,26 @@ const Container = styled(Modal)`
   position: relative;
 `;
 
+const CategorySearch = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+`;
+
+const SearchInput = styled(Input)`
+  flex: 1 1 auto;
+  max-width: none;
+  margin-left: 16px;
+`;
+
 const SelectCategoryPage = styled(Tab.Page).attrs({
   id: "newCategory_select",
-})`
-  ${Dropdown} {
-    margin-top: 24px;
-  }
-`;
+})``;
 
 export const SelectCategoryApp = () => {
   const history = useHistory();
   const [option, setOption] = useState("by_product_name");
+  const [keyword, setKeyword] = useState("");
 
   return (
     <Container open clear title="新增類別" onCancel={() => history.push("/")}>
@@ -49,13 +58,22 @@ export const SelectCategoryApp = () => {
           </Tab.Item>
         </Tab.List>
         <SelectCategoryPage>
-          <Dropdown
-            options={categoryOptions}
-            value={option}
-            onChange={(evt, data) => {
-              setOption(data.value);
-            }}
-          />
+          <CategorySearch>
+            <Dropdown
+              options={categoryOptions}
+              value={option}
+              onChange={(evt, data) => {
+                setOption(data.value);
+              }}
+            />
+            <SearchInput
+              placeholder="請輸入關鍵字(ex.咖啡、飲料)或群組代碼(ex.3002)"
+              value={keyword}
+              onChange={(evt) => {
+                setKeyword(evt.target.value);
+              }}
+            />
+          </CategorySearch>
         </SelectCategoryPage>
       </Tab.Container>
     </Container>
