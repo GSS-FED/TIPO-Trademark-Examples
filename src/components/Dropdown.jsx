@@ -9,6 +9,7 @@ export const Dropdown = styled(S.Dropdown)`
   padding: 0 12px;
   border: 1px solid #d8e2f5;
   border-radius: 4px;
+  white-space: nowrap;
 
   .divider.text {
     width: 182px;
