@@ -9,7 +9,9 @@ import {
   SearchContent,
   CategoryList,
 } from "../../components";
+import { CategorySubModal } from "./CategorySubModal";
 import * as API from "../../api";
+import { Category as C } from "../../utils";
 
 const categoryOptions = [
   {
@@ -55,9 +57,11 @@ const SearchResult = styled.div`
 
 export const SelectCategoryApp = () => {
   const history = useHistory();
+  const [isModalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [option, setOption] = useState("by_product_name");
   const [keyword, setKeyword] = useState("");
+  const [currentCategory, setCurrentCategory] = useState(C.empty);
 
   useEffect(() => {
     API.categories().then(setCategories);
@@ -101,6 +105,8 @@ export const SelectCategoryApp = () => {
                   href={`#${cat.id}`}
                   onClick={(evt) => {
                     evt.preventDefault();
+                    setCurrentCategory(cat);
+                    setModalOpen(true);
                   }}
                 >
                   {cat.id} {cat.title}
@@ -110,6 +116,16 @@ export const SelectCategoryApp = () => {
           </SearchResult>
         </SelectCategoryPage>
       </Tab.Container>
+      <CategorySubModal
+        open={isModalOpen}
+        category={currentCategory}
+        onCancel={() => {
+          setModalOpen(false);
+        }}
+        onSubmit={() => {
+          setModalOpen(false);
+        }}
+      />
     </Container>
   );
 };
