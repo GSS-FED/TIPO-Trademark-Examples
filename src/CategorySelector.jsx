@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as C from "./category";
+import * as C from "./utils/category";
 import * as Category from "./components/Category";
 import Select from "./Select";
 import Collapsed from "./Collapsed";
@@ -9,7 +9,7 @@ export default function CategorySelector({ data = C.empty, onChange }) {
   const [checked, setChecked] = useState(false);
   const [selected, setSelected] = useState([]);
 
-  return C.isNode(data) ? (
+  return C.isLeaf(data) ? (
     <Category.Item>
       <Select
         checked={checked}

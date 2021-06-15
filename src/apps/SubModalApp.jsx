@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CategorySelector from "../CategorySelector";
 import { Button, Category, SubModal } from "../components";
 import * as API from "../api";
-import * as C from "../category";
+import * as C from "../utils/category";
 
 export function SubModalApp() {
   const [categories, setCategories] = useState([]);
