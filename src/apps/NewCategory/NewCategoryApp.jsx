@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
 import { CategorySubModal } from "./CategorySubModal";
@@ -52,6 +53,7 @@ const SearchResult = styled.div`
 `;
 
 export const NewCategoryApp = () => {
+  const history = useHistory();
   const [isModalOpen, setModalOpen] = useState(false);
   const [option, setOption] = useState("batch_input");
   const [tags, setTags] = useState([]);
@@ -77,7 +79,7 @@ export const NewCategoryApp = () => {
   }, []);
 
   return (
-    <Container open clear title="新增類別">
+    <Container open clear title="新增類別" onCancel={() => history.push("/")}>
       <Tab.Container>
         <Tab.List>
           <Tab.Item actived>

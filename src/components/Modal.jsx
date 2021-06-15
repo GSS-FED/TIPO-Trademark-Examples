@@ -63,6 +63,7 @@ export const Modal = ({
   clear = false,
   title,
   children,
+  onCancel,
 }) => {
   return (
     <ModalParent open={open} clear={clear}>
@@ -70,7 +71,7 @@ export const Modal = ({
       <Wrapper>
         <Header>
           <Title>{title}</Title>
-          <Close>
+          <Close onClick={onCancel}>
             <FontAwesomeIcon icon={faTimes} />
           </Close>
         </Header>
