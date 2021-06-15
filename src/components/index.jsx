@@ -1,6 +1,7 @@
 export { Button } from "./Button";
 export { Checkbox } from "./Checkbox";
 export * as Category from "./Category";
+export * as SearchContent from "./SearchContent";
 export * as SubModal from "./SubModal";
 export { Modal } from "./Modal";
 export * as Tab from "./Tab";

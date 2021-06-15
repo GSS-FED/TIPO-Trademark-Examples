@@ -1,9 +1,14 @@
 import { useState, useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Modal, Tab, Dropdown, TaggedSearch } from "../../components";
+import {
+  Modal,
+  Tab,
+  Dropdown,
+  TaggedSearch,
+  SearchContent,
+} from "../../components";
 import { CategorySubModal } from "./CategorySubModal";
-import * as SearchContent from "./SearchContent";
 import { SearchCategoryResult } from "./SearchCategoryResult";
 import * as API from "../../api";
 
