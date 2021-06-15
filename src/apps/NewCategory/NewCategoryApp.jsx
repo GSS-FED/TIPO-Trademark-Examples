@@ -119,8 +119,12 @@ export const NewCategoryApp = () => {
           setModalOpen(false);
         }}
         onSubmit={(category) => {
-          updateProduct({ ...currentProduct, category });
-          setCurrentProduct();
+          const newProduct = {
+            ...currentProduct,
+            category,
+          };
+          updateProduct(newProduct);
+          setCurrentProduct(newProduct);
           setModalOpen(false);
         }}
       />
