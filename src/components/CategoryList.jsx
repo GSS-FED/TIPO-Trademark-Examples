@@ -47,12 +47,13 @@ const formatCount = (count) => {
 };
 
 export const Item = ({ id, className, count, href, onClick, children }) => {
+  const showCount = count !== undefined && count !== 0;
   return (
     <StyledItem id={id} className={className}>
       <StyledAnchor href={href} onClick={onClick}>
         {children}
       </StyledAnchor>
-      {count !== undefined && <Count>{formatCount(count)}</Count>}
+      {showCount && <Count>{formatCount(count)}</Count>}
     </StyledItem>
   );
 };

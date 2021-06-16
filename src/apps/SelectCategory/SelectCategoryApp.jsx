@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -59,20 +59,30 @@ export const SelectCategoryApp = () => {
   const history = useHistory();
   const [isModalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [categoryMap, setCategoryMap] = useState({});
   const [option, setOption] = useState("by_product_name");
   const [keyword, setKeyword] = useState("");
   const [currentCategory, setCurrentCategory] = useState(C.empty);
-  const [selected, setSelected] = useState([]);
-  const flattened = useMemo(() => C.flattenSelections(selected), [selected]);
-  console.log(flattened);
+
+  const updateCategoryMap = useCallback(
+    (cat, selected) => {
+      const result = { ...categoryMap, [cat.id]: selected };
+      setCategoryMap(result);
+    },
+    [categoryMap]
+  );
 
   useEffect(() => {
     API.categories().then(setCategories);
   }, []);
 
   useEffect(() => {
-    setSelected(C.buildSelections(currentCategory));
-  }, [currentCategory]);
+    let result = {};
+    for (let cat of categories) {
+      result[cat.id] = [];
+    }
+    setCategoryMap(result);
+  }, [categories]);
 
   return (
     <Container open clear title="新增類別" onCancel={() => history.push("/")}>
@@ -107,19 +117,24 @@ export const SelectCategoryApp = () => {
               商品
             </SearchContent.Header>
             <CategoryList.List>
-              {categories.map((cat) => (
-                <CategoryList.Item
-                  key={cat.id}
-                  href={`#${cat.id}`}
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    setCurrentCategory(cat);
-                    setModalOpen(true);
-                  }}
-                >
-                  {cat.id} {cat.title}
-                </CategoryList.Item>
-              ))}
+              {categories.map((cat) => {
+                const flattened =
+                  C.flattenSelections(categoryMap[cat.id]) ?? [];
+                return (
+                  <CategoryList.Item
+                    key={cat.id}
+                    href={`#${cat.id}`}
+                    count={flattened.length}
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      setCurrentCategory(cat);
+                      setModalOpen(true);
+                    }}
+                  >
+                    {cat.id} {cat.title}
+                  </CategoryList.Item>
+                );
+              })}
             </CategoryList.List>
           </SearchResult>
         </SelectCategoryPage>
@@ -127,12 +142,12 @@ export const SelectCategoryApp = () => {
       <CategorySubModal
         open={isModalOpen}
         category={currentCategory}
-        selected={selected}
+        selected={categoryMap[currentCategory.id]}
         onCancel={() => {
           setModalOpen(false);
         }}
         onSubmit={(selected) => {
-          setSelected(selected);
+          updateCategoryMap(currentCategory, selected);
           setModalOpen(false);
         }}
       />
