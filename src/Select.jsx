@@ -1,6 +1,16 @@
-export default function Select({ checked = false, onChange, children }) {
+import cx from "classnames";
+
+export default function Select({
+  id,
+  className,
+  checked = false,
+  onChange,
+  children,
+}) {
+  const classes = cx("form_selectInputWrapper", className);
+
   return (
-    <label className="form_selectInputWrapper">
+    <label id={id} className={classes}>
       <input
         type="checkbox"
         checked={checked}

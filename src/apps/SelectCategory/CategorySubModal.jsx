@@ -1,8 +1,14 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
+import styled from "styled-components";
 import { SubModal, Button } from "../../components";
 import Collapsed from "../../Collapsed";
 import Select from "../../Select";
 import { Category as C } from "../../utils";
+
+const StyledSelect = styled(Select)`
+  padding: 12px 12px 12px 0;
+  margin-left: -16px;
+`;
 
 const CategoryLeaf = ({ category, selected = [], onChange }) => {
   const products = useMemo(() => C.getProducts(category), [category]);
@@ -16,6 +22,15 @@ const CategoryLeaf = ({ category, selected = [], onChange }) => {
     }
     return result;
   }, [products, selected]);
+  const isSelectedAll = products.length && products.length === selected.length;
+
+  const handleSelectAll = useCallback(
+    (checked) => {
+      if (typeof onChange !== "function") return;
+      onChange(checked ? products : []);
+    },
+    [onChange, products]
+  );
 
   const handleChange = useCallback(
     (product) => (checked) => {
@@ -31,15 +46,24 @@ const CategoryLeaf = ({ category, selected = [], onChange }) => {
     [onChange, selectMap, products]
   );
 
-  return products.map((product) => (
-    <Select
-      key={product}
-      checked={selectMap[product]}
-      onChange={handleChange(product)}
-    >
-      {product}
-    </Select>
-  ));
+  return (
+    <>
+      {products.length !== 0 && (
+        <StyledSelect checked={isSelectedAll} onChange={handleSelectAll}>
+          全選
+        </StyledSelect>
+      )}
+      {products.map((product) => (
+        <StyledSelect
+          key={product}
+          checked={selectMap[product]}
+          onChange={handleChange(product)}
+        >
+          {product}
+        </StyledSelect>
+      ))}
+    </>
+  );
 };
 
 const CategoryNode = ({ category, selected = [], onChange }) => {
