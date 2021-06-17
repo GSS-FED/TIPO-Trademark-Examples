@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SubModalApp, NewCategoryApp, SelectCategoryApp } from "./apps";
+import { NewCategoryApp, SelectCategoryApp } from "./apps";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "jquery-ui-dist/jquery-ui.min.css";
 import "semantic-ui-css/semantic.min.css";
@@ -21,9 +21,6 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/submodal">Submodal</Link>
-            </li>
-            <li>
               <Link to="/select-category">Select Category</Link>
             </li>
             <li>
@@ -33,9 +30,6 @@ export default function App() {
         </Nav>
 
         <Switch>
-          <Route path="/submodal">
-            <SubModalApp />
-          </Route>
           <Route path="/select-category">
             <SelectCategoryApp />
           </Route>
