@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -59,9 +59,18 @@ export const SelectCategoryApp = () => {
   const history = useHistory();
   const [isModalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const categoryIndex = useMemo(
+    () => C.createSimpleIndex(categories),
+    [categories]
+  );
   const [categoryMap, setCategoryMap] = useState({});
   const [option, setOption] = useState("by_product_name");
   const [keyword, setKeyword] = useState("");
+  const keywordRegex = useMemo(() => new RegExp(keyword.trim()), [keyword]);
+  const filteredCategories = useMemo(() => {
+    if (!keyword.trim()) return categories;
+    return categories.filter((cat) => keywordRegex.test(categoryIndex[cat.id]));
+  }, [keyword, keywordRegex, categories, categoryIndex]);
   const [currentCategory, setCurrentCategory] = useState(C.empty);
 
   const updateCategoryMap = useCallback(
@@ -117,7 +126,7 @@ export const SelectCategoryApp = () => {
               商品
             </SearchContent.Header>
             <CategoryList.List>
-              {categories.map((cat) => {
+              {filteredCategories.map((cat) => {
                 const flattened =
                   C.flattenSelections(categoryMap[cat.id]) ?? [];
                 return (

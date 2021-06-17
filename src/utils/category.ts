@@ -50,3 +50,31 @@ export const flattenSelections = (selected: SelectionTree = []): string[] => {
   }
   return result;
 };
+
+type CategoryIndex = {
+  [key: string]: string;
+};
+
+const buildIndex = (cat: Category | CategoryLeaf): CategoryIndex => {
+  if (isLeaf(cat)) {
+    return {
+      [cat.id]: cat.id + cat.title + cat.content,
+    };
+  }
+  let result = {
+    [cat.id]: cat.id + cat.title,
+  };
+  for (let subcat of cat.subcategories) {
+    const str = buildIndex(subcat)[subcat.id];
+    result[cat.id] = result[cat.id] + str;
+  }
+  return result;
+};
+
+export const createSimpleIndex = (cs: Category[]): CategoryIndex => {
+  let result = {};
+  for (let cat of cs) {
+    result = { ...result, ...buildIndex(cat) };
+  }
+  return result;
+};
