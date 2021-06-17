@@ -5,12 +5,14 @@ import Collapsed from "../../Collapsed";
 import Select from "../../Select";
 import { Category as C } from "../../utils";
 
+const emptyArray = [];
+
 const StyledSelect = styled(Select)`
   padding: 12px 12px 12px 0;
   margin-left: -16px;
 `;
 
-const CategoryLeaf = ({ category, selected = [], onChange }) => {
+const CategoryLeaf = ({ category, selected = emptyArray, onChange }) => {
   const products = useMemo(() => C.getProducts(category), [category]);
   const selectMap = useMemo(() => {
     let result = {};
@@ -27,7 +29,7 @@ const CategoryLeaf = ({ category, selected = [], onChange }) => {
   const handleSelectAll = useCallback(
     (checked) => {
       if (typeof onChange !== "function") return;
-      onChange(checked ? products : []);
+      onChange(checked ? products : emptyArray);
     },
     [onChange, products]
   );
@@ -66,8 +68,8 @@ const CategoryLeaf = ({ category, selected = [], onChange }) => {
   );
 };
 
-const CategoryNode = ({ category, selected = [], onChange }) => {
-  const { subcategories = [] } = category;
+const CategoryNode = ({ category, selected = emptyArray, onChange }) => {
+  const { subcategories = emptyArray } = category;
 
   const handleChange = useCallback(
     (i) => (ss) => {
@@ -88,7 +90,7 @@ const CategoryNode = ({ category, selected = [], onChange }) => {
   ));
 };
 
-const CollapsedCategory = ({ category, selected = [], onChange }) => {
+const CollapsedCategory = ({ category, selected = emptyArray, onChange }) => {
   const Cat = C.isLeaf(category) ? CategoryLeaf : CategoryNode;
   return <Cat category={category} selected={selected} onChange={onChange} />;
 };
@@ -98,7 +100,7 @@ export const CategorySubModal = ({
   className,
   open,
   category = C.empty,
-  selected = [],
+  selected = emptyArray,
   onCancel,
   onSubmit,
 }) => {

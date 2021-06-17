@@ -39,7 +39,7 @@ export const buildSelections = (cat: Category): SelectionTree => {
   return cat.subcategories.map((c) => (isLeaf(c) ? [] : buildSelections(c)));
 };
 
-export const flattenSelections = (selected: SelectionTree): string[] => {
+export const flattenSelections = (selected: SelectionTree = []): string[] => {
   let result: string[] = [];
   for (let x of selected) {
     if (Array.isArray(x)) {
