@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NewCategoryApp, SelectCategoryApp } from "./apps";
+import { NewCategoryApp, SelectCategoryApp, EditCategoryApp } from "./apps";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "jquery-ui-dist/jquery-ui.min.css";
 import "semantic-ui-css/semantic.min.css";
@@ -26,6 +26,9 @@ export default function App() {
             <li>
               <Link to="/new-category">New Category</Link>
             </li>
+            <li>
+              <Link to="/edit-category">Edit Category</Link>
+            </li>
           </ul>
         </Nav>
 
@@ -35,6 +38,9 @@ export default function App() {
           </Route>
           <Route path="/new-category">
             <NewCategoryApp />
+          </Route>
+          <Route path="/edit-category">
+            <EditCategoryApp />
           </Route>
           <Route path="/" />
         </Switch>
