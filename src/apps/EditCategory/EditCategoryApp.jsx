@@ -12,6 +12,13 @@ const Container = styled(Modal)`
   position: relative;
 `;
 
+const CustomContent = styled.div`
+  border: 1px solid #cce1ff;
+  border-top-width: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+`;
+
 export const EditCategoryApp = () => {
   const history = useHistory();
   const [categories, setCategories] = useState([]);
@@ -100,15 +107,19 @@ export const EditCategoryApp = () => {
         onSelect={handleSelectAll}
         onSubmit={handleCreateCategory}
       />
-      {customCategories.map((cat, i) => (
-        <CustomCategory
-          key={cat.id}
-          category={cat}
-          checked={selectMap[cat.id]}
-          onChange={handleEditCategory(i)}
-          onSelect={handleUpdateCustomSelection(cat.id)}
-        />
-      ))}
+      {customCategories.length !== 0 && (
+        <CustomContent>
+          {customCategories.map((cat, i) => (
+            <CustomCategory
+              key={cat.id}
+              category={cat}
+              checked={selectMap[cat.id]}
+              onChange={handleEditCategory(i)}
+              onSelect={handleUpdateCustomSelection(cat.id)}
+            />
+          ))}
+        </CustomContent>
+      )}
       {categories.map((cat, i) => (
         <BuiltInCategory
           key={cat.id}
