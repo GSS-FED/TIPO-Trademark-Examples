@@ -3,43 +3,16 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
 import { Modal, Button } from "../../components";
 import Select from "../../Select";
 import * as List from "./List";
+import { CategoryCreator } from "./CategoryCreator";
 import * as API from "../../api";
 import { Category as C, IdMap } from "../../utils";
 
 const Container = styled(Modal)`
   position: relative;
 `;
-
-const CategoryCreator = ({ id, className, checked, onSubmit, onSelect }) => {
-  const [value, setValue] = useState("");
-
-  const handleSubmit = useCallback(() => {
-    setValue("");
-    if (typeof onSubmit !== "function") return;
-    onSubmit({
-      id: uuidv4(),
-      title: value,
-      content: value,
-      comments: [],
-    });
-  }, [onSubmit, value]);
-
-  return (
-    <List.Title id={id} className={className}>
-      <Select checked={checked} onChange={onSelect}>
-        <span>自訂商品服務名稱</span>
-        <input value={value} onChange={(evt) => setValue(evt.target.value)} />
-        <Button type="record" disabled={!value} onClick={handleSubmit}>
-          新增
-        </Button>
-      </Select>
-    </List.Title>
-  );
-};
 
 const CustomCategory = ({
   id,
