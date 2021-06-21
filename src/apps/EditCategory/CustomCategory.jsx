@@ -1,9 +1,39 @@
 import { useState, useCallback } from "react";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "../../components";
+import { Button, Input } from "../../components";
 import Select from "../../Select";
 import * as List from "./List";
+
+const Container = styled(List.Title)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const TitleSelect = styled(Select)`
+  margin-right: 12px;
+`;
+
+const TitleInput = styled(Input)`
+  margin-right: 12px;
+`;
+
+const Submit = styled(Button)`
+  margin-right: 12px;
+`;
+
+const Content = styled.div`
+  height: 40px;
+  line-height: 40px;
+  margin-right: 12px;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  color: #66a5ff;
+  cursor: pointer;
+`;
 
 export const CustomCategory = ({
   id,
@@ -49,26 +79,26 @@ export const CustomCategory = ({
   );
 
   return (
-    <List.Title id={id} className={className}>
-      <Select checked={checked} onChange={onSelect}>
-        <span>[自訂商品]</span>
-        {isEditing ? (
-          <>
-            <input value={value} onChange={handleValueChange} />
-            <Button type="primary" onClick={handleChange}>
-              確定
-            </Button>
-            <Button type="text" onClick={handleCancel}>
-              取消
-            </Button>
-          </>
-        ) : (
-          <>
-            <span>{category.content}</span>
-            <FontAwesomeIcon icon={faPen} onClick={handleEdit} />
-          </>
-        )}
-      </Select>
-    </List.Title>
+    <Container id={id} className={className}>
+      <TitleSelect checked={checked} onChange={onSelect}>
+        [自訂商品]
+      </TitleSelect>
+      {isEditing ? (
+        <>
+          <TitleInput value={value} onChange={handleValueChange} />
+          <Submit type="primary" onClick={handleChange}>
+            確定
+          </Submit>
+          <Button type="text" onClick={handleCancel}>
+            取消
+          </Button>
+        </>
+      ) : (
+        <>
+          <Content>{category.content}</Content>
+          <Icon icon={faPen} onClick={handleEdit} />
+        </>
+      )}
+    </Container>
   );
 };
