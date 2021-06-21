@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import styled from "styled-components";
-import { IdMap } from "../../utils";
+import { useSelected } from "../../hooks";
 import Collapsed from "../../Collapsed";
 import Select from "../../Select";
 import * as List from "./List";
@@ -39,10 +39,7 @@ export const BuiltInCategory = ({
     [subcategories]
   );
   const isAllSelected = ids.length && ids.length === selected.length;
-  const selectMap = useMemo(
-    () => IdMap.fromIds(ids, selected),
-    [ids, selected]
-  );
+  const { isSelected, toggleSelected } = useSelected(ids, selected);
 
   const handleSelectAll = useCallback(
     (value) => {
@@ -56,11 +53,9 @@ export const BuiltInCategory = ({
   const handleSelect = useCallback(
     (id) => (value) => {
       if (typeof onChange !== "function") return;
-      const newMap = { ...selectMap, [id]: value };
-      const newSelected = IdMap.toActivedIds(ids, newMap);
-      onChange(newSelected);
+      onChange(toggleSelected(id, value));
     },
-    [onChange, selectMap, ids]
+    [onChange, toggleSelected]
   );
 
   const title = (
@@ -77,7 +72,10 @@ export const BuiltInCategory = ({
       <List.List>
         {subcategories.map((cat) => (
           <List.Item key={cat.id}>
-            <Select checked={selectMap[cat.id]} onChange={handleSelect(cat.id)}>
+            <Select
+              checked={isSelected(cat.id)}
+              onChange={handleSelect(cat.id)}
+            >
               <span>{cat.id}</span>
               <span>{cat.title}</span>
             </Select>
