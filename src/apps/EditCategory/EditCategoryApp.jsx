@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
-import { Modal } from "../../components";
+import { Modal, Button } from "../../components";
 import Select from "../../Select";
 import * as API from "../../api";
 import { Category as C, IdMap } from "../../utils";
@@ -44,9 +44,9 @@ const CategoryCreator = ({ id, className, checked, onSubmit, onSelect }) => {
       <Select checked={checked} onChange={onSelect}>
         <span>自訂商品服務名稱</span>
         <input value={value} onChange={(evt) => setValue(evt.target.value)} />
-        <button disabled={!value} onClick={handleSubmit}>
+        <Button type="record" disabled={!value} onClick={handleSubmit}>
           新增
-        </button>
+        </Button>
       </Select>
     </CatTitle>
   );
@@ -67,24 +67,33 @@ const CustomCategory = ({
     setValue(evt.target.value);
   }, []);
 
-  const handleChange = useCallback(() => {
-    setEditing(false);
-    if (typeof onChange !== "function") return;
-    onChange({
-      ...category,
-      title: value,
-      content: value,
-    });
-  }, [onChange, category, value]);
+  const handleChange = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      setEditing(false);
+      if (typeof onChange !== "function") return;
+      onChange({
+        ...category,
+        title: value,
+        content: value,
+      });
+    },
+    [onChange, category, value]
+  );
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = useCallback((evt) => {
+    evt.preventDefault();
     setEditing(false);
   }, []);
 
-  const handleEdit = useCallback(() => {
-    setValue(category.content);
-    setEditing(true);
-  }, [category]);
+  const handleEdit = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      setValue(category.content);
+      setEditing(true);
+    },
+    [category]
+  );
 
   return (
     <CatTitle id={id} className={className}>
@@ -93,8 +102,12 @@ const CustomCategory = ({
         {isEditing ? (
           <>
             <input value={value} onChange={handleValueChange} />
-            <button onClick={handleChange}>確定</button>
-            <button onClick={handleCancel}>取消</button>
+            <Button type="primary" onClick={handleChange}>
+              確定
+            </Button>
+            <Button type="text" onClick={handleCancel}>
+              取消
+            </Button>
           </>
         ) : (
           <>
