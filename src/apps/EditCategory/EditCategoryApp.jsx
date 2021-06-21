@@ -25,7 +25,7 @@ const CatItem = styled.div`
   padding: 12px 24px;
 `;
 
-const CategoryCreator = ({ id, className, onSubmit }) => {
+const CategoryCreator = ({ id, className, checked, onSubmit, onSelect }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = useCallback(() => {
@@ -41,11 +41,13 @@ const CategoryCreator = ({ id, className, onSubmit }) => {
 
   return (
     <CatTitle id={id} className={className}>
-      <span>自訂商品服務名稱</span>
-      <input value={value} onChange={(evt) => setValue(evt.target.value)} />
-      <button disabled={!value} onClick={handleSubmit}>
-        新增
-      </button>
+      <Select checked={checked} onChange={onSelect}>
+        <span>自訂商品服務名稱</span>
+        <input value={value} onChange={(evt) => setValue(evt.target.value)} />
+        <button disabled={!value} onClick={handleSubmit}>
+          新增
+        </button>
+      </Select>
     </CatTitle>
   );
 };
@@ -182,6 +184,8 @@ export const EditCategoryApp = () => {
     () => IdMap.toActivedIds(customIds, selectMap),
     [customIds, selectMap]
   );
+  const isAllSelected =
+    customIds.length && customIds.length === customSelected.length;
   console.log(customSelected);
 
   const handleCreateCategory = useCallback((cat) => {
@@ -214,6 +218,21 @@ export const EditCategoryApp = () => {
     [selectMap]
   );
 
+  const handleSelectAll = useCallback(
+    (value) => {
+      if (!value) {
+        setSelectMap({});
+        return;
+      }
+      let newSelectMap = {};
+      for (let id of customIds) {
+        newSelectMap[id] = true;
+      }
+      setSelectMap(newSelectMap);
+    },
+    [customIds]
+  );
+
   useEffect(() => {
     API.categories().then(setCategories);
   }, []);
@@ -230,7 +249,11 @@ export const EditCategoryApp = () => {
 
   return (
     <Container open clear title="編輯類別" onCancel={() => history.push("/")}>
-      <CategoryCreator onSubmit={handleCreateCategory} />
+      <CategoryCreator
+        checked={isAllSelected}
+        onSelect={handleSelectAll}
+        onSubmit={handleCreateCategory}
+      />
       {customCategories.map((cat, i) => (
         <CustomCategory
           key={cat.id}
