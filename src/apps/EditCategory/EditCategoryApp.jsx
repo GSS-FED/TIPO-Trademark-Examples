@@ -1,86 +1,17 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { Modal, Button } from "../../components";
+import { Modal } from "../../components";
 import Select from "../../Select";
 import * as List from "./List";
 import { CategoryCreator } from "./CategoryCreator";
+import { CustomCategory } from "./CustomCategory";
 import * as API from "../../api";
 import { Category as C, IdMap } from "../../utils";
 
 const Container = styled(Modal)`
   position: relative;
 `;
-
-const CustomCategory = ({
-  id,
-  className,
-  checked,
-  category,
-  onChange,
-  onSelect,
-}) => {
-  const [isEditing, setEditing] = useState(false);
-  const [value, setValue] = useState(category.content);
-
-  const handleValueChange = useCallback((evt) => {
-    setValue(evt.target.value);
-  }, []);
-
-  const handleChange = useCallback(
-    (evt) => {
-      evt.preventDefault();
-      setEditing(false);
-      if (typeof onChange !== "function") return;
-      onChange({
-        ...category,
-        title: value,
-        content: value,
-      });
-    },
-    [onChange, category, value]
-  );
-
-  const handleCancel = useCallback((evt) => {
-    evt.preventDefault();
-    setEditing(false);
-  }, []);
-
-  const handleEdit = useCallback(
-    (evt) => {
-      evt.preventDefault();
-      setValue(category.content);
-      setEditing(true);
-    },
-    [category]
-  );
-
-  return (
-    <List.Title id={id} className={className}>
-      <Select checked={checked} onChange={onSelect}>
-        <span>[自訂商品]</span>
-        {isEditing ? (
-          <>
-            <input value={value} onChange={handleValueChange} />
-            <Button type="primary" onClick={handleChange}>
-              確定
-            </Button>
-            <Button type="text" onClick={handleCancel}>
-              取消
-            </Button>
-          </>
-        ) : (
-          <>
-            <span>{category.content}</span>
-            <FontAwesomeIcon icon={faPen} onClick={handleEdit} />
-          </>
-        )}
-      </Select>
-    </List.Title>
-  );
-};
 
 const BuiltInCategory = ({
   id,
