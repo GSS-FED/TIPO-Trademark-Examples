@@ -1,7 +1,30 @@
 import { useMemo, useCallback } from "react";
+import styled from "styled-components";
 import { IdMap } from "../../utils";
+import Collapsed from "../../Collapsed";
 import Select from "../../Select";
 import * as List from "./List";
+
+const Container = styled(Collapsed)`
+  .form_collapsible_title {
+    border: 1px solid #cce1ff;
+    border-top-width: 0;
+    padding: 7px 32px;
+  }
+  .form_collapsible_content {
+    padding: 0;
+    margin-left: 0;
+    background: #eef5ff;
+  }
+`;
+
+const Title = styled(List.Title)`
+  padding: 0;
+`;
+
+const Id = styled.span`
+  margin-right: 16px;
+`;
 
 export const BuiltInCategory = ({
   id,
@@ -40,14 +63,17 @@ export const BuiltInCategory = ({
     [onChange, selectMap, ids]
   );
 
+  const title = (
+    <Title>
+      <Select checked={isAllSelected} onChange={handleSelectAll}>
+        <Id>{category.id}</Id>
+        <span>{category.title}</span>
+      </Select>
+    </Title>
+  );
+
   return (
-    <div id={id} className={className}>
-      <List.Title>
-        <Select checked={isAllSelected} onChange={handleSelectAll}>
-          <span>{category.id}</span>
-          <span>{category.title}</span>
-        </Select>
-      </List.Title>
+    <Container id={id} className={className} title={title}>
       <List.List>
         {subcategories.map((cat) => (
           <List.Item key={cat.id}>
@@ -58,6 +84,6 @@ export const BuiltInCategory = ({
           </List.Item>
         ))}
       </List.List>
-    </div>
+    </Container>
   );
 };
