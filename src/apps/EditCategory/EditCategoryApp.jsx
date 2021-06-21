@@ -39,7 +39,9 @@ export const EditCategoryApp = () => {
   );
   const isAllSelected =
     customIds.length && customIds.length === customSelected.length;
-  console.log(customSelected);
+
+  console.log("custom category selected", customSelected);
+  console.log("category selected", categorySelected);
 
   const handleCreateCategory = useCallback((cat) => {
     setCustomCategories((cs) => [...cs, cat]);
