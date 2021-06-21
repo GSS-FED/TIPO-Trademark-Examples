@@ -6,23 +6,12 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
 import { Modal, Button } from "../../components";
 import Select from "../../Select";
+import * as List from "./List";
 import * as API from "../../api";
 import { Category as C, IdMap } from "../../utils";
 
 const Container = styled(Modal)`
   position: relative;
-`;
-
-const CatTitle = styled.div`
-  padding: 7px 32px;
-`;
-
-const CatList = styled.div`
-  padding: 0 32px;
-`;
-
-const CatItem = styled.div`
-  padding: 12px 24px;
 `;
 
 const CategoryCreator = ({ id, className, checked, onSubmit, onSelect }) => {
@@ -40,7 +29,7 @@ const CategoryCreator = ({ id, className, checked, onSubmit, onSelect }) => {
   }, [onSubmit, value]);
 
   return (
-    <CatTitle id={id} className={className}>
+    <List.Title id={id} className={className}>
       <Select checked={checked} onChange={onSelect}>
         <span>自訂商品服務名稱</span>
         <input value={value} onChange={(evt) => setValue(evt.target.value)} />
@@ -48,7 +37,7 @@ const CategoryCreator = ({ id, className, checked, onSubmit, onSelect }) => {
           新增
         </Button>
       </Select>
-    </CatTitle>
+    </List.Title>
   );
 };
 
@@ -96,7 +85,7 @@ const CustomCategory = ({
   );
 
   return (
-    <CatTitle id={id} className={className}>
+    <List.Title id={id} className={className}>
       <Select checked={checked} onChange={onSelect}>
         <span>[自訂商品]</span>
         {isEditing ? (
@@ -116,7 +105,7 @@ const CustomCategory = ({
           </>
         )}
       </Select>
-    </CatTitle>
+    </List.Title>
   );
 };
 
@@ -159,22 +148,22 @@ const BuiltInCategory = ({
 
   return (
     <div id={id} className={className}>
-      <CatTitle>
+      <List.Title>
         <Select checked={isAllSelected} onChange={handleSelectAll}>
           <span>{category.id}</span>
           <span>{category.title}</span>
         </Select>
-      </CatTitle>
-      <CatList>
+      </List.Title>
+      <List.List>
         {subcategories.map((cat) => (
-          <CatItem key={cat.id}>
+          <List.Item key={cat.id}>
             <Select checked={selectMap[cat.id]} onChange={handleSelect(cat.id)}>
               <span>{cat.id}</span>
               <span>{cat.title}</span>
             </Select>
-          </CatItem>
+          </List.Item>
         ))}
-      </CatList>
+      </List.List>
     </div>
   );
 };
