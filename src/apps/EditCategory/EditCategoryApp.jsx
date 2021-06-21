@@ -50,7 +50,14 @@ const CategoryCreator = ({ id, className, onSubmit }) => {
   );
 };
 
-const CustomCategory = ({ id, className, category, onChange }) => {
+const CustomCategory = ({
+  id,
+  className,
+  checked,
+  category,
+  onChange,
+  onSelect,
+}) => {
   const [isEditing, setEditing] = useState(false);
   const [value, setValue] = useState(category.content);
 
@@ -79,19 +86,21 @@ const CustomCategory = ({ id, className, category, onChange }) => {
 
   return (
     <CatTitle id={id} className={className}>
-      <span>[自訂商品]</span>
-      {isEditing ? (
-        <>
-          <input value={value} onChange={handleValueChange} />
-          <button onClick={handleChange}>確定</button>
-          <button onClick={handleCancel}>取消</button>
-        </>
-      ) : (
-        <>
-          <span>{category.content}</span>
-          <FontAwesomeIcon icon={faPen} onClick={handleEdit} />
-        </>
-      )}
+      <Select checked={checked} onChange={onSelect}>
+        <span>[自訂商品]</span>
+        {isEditing ? (
+          <>
+            <input value={value} onChange={handleValueChange} />
+            <button onClick={handleChange}>確定</button>
+            <button onClick={handleCancel}>取消</button>
+          </>
+        ) : (
+          <>
+            <span>{category.content}</span>
+            <FontAwesomeIcon icon={faPen} onClick={handleEdit} />
+          </>
+        )}
+      </Select>
     </CatTitle>
   );
 };
@@ -164,7 +173,16 @@ export const EditCategoryApp = () => {
     [categorySelectionTree]
   );
   const [customCategories, setCustomCategories] = useState([]);
-  console.log(categorySelected);
+  const customIds = useMemo(
+    () => customCategories.map((cat) => cat.id),
+    [customCategories]
+  );
+  const [selectMap, setSelectMap] = useState({});
+  const customSelected = useMemo(
+    () => IdMap.toActivedIds(customIds, selectMap),
+    [customIds, selectMap]
+  );
+  console.log(customSelected);
 
   const handleCreateCategory = useCallback((cat) => {
     setCustomCategories((cs) => [...cs, cat]);
@@ -188,6 +206,14 @@ export const EditCategoryApp = () => {
     []
   );
 
+  const handleUpdateCustomSelection = useCallback(
+    (id) => (value) => {
+      const newSelectMap = { ...selectMap, [id]: value };
+      setSelectMap(newSelectMap);
+    },
+    [selectMap]
+  );
+
   useEffect(() => {
     API.categories().then(setCategories);
   }, []);
@@ -197,6 +223,11 @@ export const EditCategoryApp = () => {
     setCategorySelectionTree(selectionTree);
   }, [categories]);
 
+  useEffect(() => {
+    const selectMap = IdMap.fromIds(customIds);
+    setSelectMap(selectMap);
+  }, [customIds]);
+
   return (
     <Container open clear title="編輯類別" onCancel={() => history.push("/")}>
       <CategoryCreator onSubmit={handleCreateCategory} />
@@ -204,7 +235,9 @@ export const EditCategoryApp = () => {
         <CustomCategory
           key={cat.id}
           category={cat}
+          checked={selectMap[cat.id]}
           onChange={handleEditCategory(i)}
+          onSelect={handleUpdateCustomSelection(cat.id)}
         />
       ))}
       {categories.map((cat, i) => (
