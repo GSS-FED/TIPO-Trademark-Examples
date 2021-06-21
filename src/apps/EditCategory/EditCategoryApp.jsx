@@ -108,9 +108,19 @@ const BuiltInCategory = ({
     () => subcategories.map((cat) => cat.id),
     [subcategories]
   );
+  const isAllSelected = ids.length && ids.length === selected.length;
   const selectMap = useMemo(
     () => IdMap.fromIds(ids, selected),
     [ids, selected]
+  );
+
+  const handleSelectAll = useCallback(
+    (value) => {
+      if (typeof onChange !== "function") return;
+      const newSelected = value ? ids : [];
+      onChange(newSelected);
+    },
+    [onChange, ids]
   );
 
   const handleSelect = useCallback(
@@ -126,8 +136,10 @@ const BuiltInCategory = ({
   return (
     <div id={id} className={className}>
       <CatTitle>
-        <span>{category.id}</span>
-        <span>{category.title}</span>
+        <Select checked={isAllSelected} onChange={handleSelectAll}>
+          <span>{category.id}</span>
+          <span>{category.title}</span>
+        </Select>
       </CatTitle>
       <CatList>
         {subcategories.map((cat) => (
