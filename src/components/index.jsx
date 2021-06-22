@@ -12,3 +12,4 @@ export { Tag } from "./Tag";
 export { TaggedSearch } from "./TaggedSearch";
 export * from "./Radio";
 export { Select } from "./Select";
+export { Collapsed } from "./Collapsed";

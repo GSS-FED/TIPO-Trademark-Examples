@@ -3,7 +3,7 @@ import cx from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-function Collapsed({
+export function Collapsed({
   id,
   className = "",
   title = "",
@@ -34,5 +34,3 @@ function Collapsed({
     </div>
   );
 }
-
-export default Collapsed;

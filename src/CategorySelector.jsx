@@ -1,8 +1,7 @@
 import { useState } from "react";
 import * as C from "./utils/category";
 import * as Category from "./components/Category";
-import { Select } from "./components";
-import Collapsed from "./Collapsed";
+import { Select, Collapsed } from "./components";
 import CategoryListSelector from "./CategoryListSelector";
 
 export default function CategorySelector({ data = C.empty, onChange }) {
