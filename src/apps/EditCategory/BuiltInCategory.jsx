@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { useSelected } from "../../hooks";
 import Collapsed from "../../Collapsed";
-import Select from "../../Select";
+import { Select } from "../../components";
 import * as List from "./List";
 
 const Container = styled(Collapsed)`

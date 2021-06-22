@@ -1,8 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { SubModal, Button } from "../../components";
+import { SubModal, Button, Select } from "../../components";
 import Collapsed from "../../Collapsed";
-import Select from "../../Select";
 import { Category as C } from "../../utils";
 
 const emptyArray = [];

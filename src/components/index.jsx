@@ -11,3 +11,4 @@ export { Dropdown } from "./Dropdown";
 export { Tag } from "./Tag";
 export { TaggedSearch } from "./TaggedSearch";
 export * from "./Radio";
+export { Select } from "./Select";

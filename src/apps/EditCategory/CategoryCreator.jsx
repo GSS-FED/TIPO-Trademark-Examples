@@ -1,8 +1,7 @@
 import { useState, useCallback } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { Button, Input } from "../../components";
-import Select from "../../Select";
+import { Button, Input, Select } from "../../components";
 import * as List from "./List";
 
 const Container = styled(List.Title)`

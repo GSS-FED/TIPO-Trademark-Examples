@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as C from "./utils/category";
 import * as Category from "./components/Category";
-import Select from "./Select";
+import { Select } from "./components";
 import Collapsed from "./Collapsed";
 import CategoryListSelector from "./CategoryListSelector";
 

@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import * as Category from "./components/Category";
-import Select from "./Select";
+import { Select } from "./components";
 
 export default function CategoryListSelector({
   categories = [],

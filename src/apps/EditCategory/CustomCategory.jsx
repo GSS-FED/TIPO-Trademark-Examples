@@ -2,8 +2,7 @@ import { useState, useCallback } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { Button, Input } from "../../components";
-import Select from "../../Select";
+import { Button, Input, Select } from "../../components";
 import * as List from "./List";
 
 const Container = styled(List.Title)`
